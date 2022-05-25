@@ -50,8 +50,7 @@ const LoginScreen: FunctionComponent = () => {
             keyboardShouldPersistTaps="handled"
             enableOnAndroid={true}
             showsVerticalScrollIndicator={false}
-            enableResetScrollToCoords={false}
-        >
+            enableResetScrollToCoords={false}>
             <StyledOverlayLoading visible={loading} />
             <SafeAreaView style={styles.body}>
                 <FormProvider {...form}>

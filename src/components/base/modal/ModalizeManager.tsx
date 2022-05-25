@@ -17,7 +17,7 @@ const ModalizeManager = () => {
     const modalRef = React.createRef<any>();
 
     const show = (id: any, element: any, props: CustomModalizeProps) => {
-        if (!modalControl.find((e) => e.id === id)) {
+        if (!modalControl.find(e => e.id === id)) {
             const sibling = new RootSiblings(
                 (
                     <Modalize
@@ -32,13 +32,11 @@ const ModalizeManager = () => {
                         modalStyle={{
                             minHeight: props?.isCenter ? '100%' : 0,
                             backgroundColor: props?.isCenter ? 'transparent' : Themes.COLORS.white,
-                        }}
-                    >
+                        }}>
                         {props?.isCenter ? (
                             <ModalizeCenterComponent
                                 customContainerStyle={props?.containerStyleCenter}
-                                handleDismiss={() => dismiss(id)}
-                            >
+                                handleDismiss={() => dismiss(id)}>
                                 {element}
                             </ModalizeCenterComponent>
                         ) : (
@@ -65,12 +63,12 @@ const ModalizeManager = () => {
     };
 
     const dismiss = (id: any) => {
-        const item = modalControl.find((e) => e.id === id);
+        const item = modalControl.find(e => e.id === id);
         if (item) {
             const { ref, element } = item;
             ref?.current?.close();
             // destroy id
-            const arrFilter = modalControl.filter((e) => e.id !== id);
+            const arrFilter = modalControl.filter(e => e.id !== id);
             modalControl = [...arrFilter];
             wait(200).then(() => {
                 element.destroy();
@@ -79,7 +77,7 @@ const ModalizeManager = () => {
     };
 
     const update = (id: any, component: any, props: any) => {
-        const item = modalControl.find((e) => e.id === id);
+        const item = modalControl.find(e => e.id === id);
         if (item) {
             item.element.update(
                 <Modalize ref={modalRef} onClosed={() => dismiss(id)} withHandle={false} {...item.props} {...props}>
@@ -90,19 +88,19 @@ const ModalizeManager = () => {
     };
 
     const dismissAll = () => {
-        modalControl.forEach((item) => {
+        modalControl.forEach(item => {
             const { element } = item;
             element?.destroy();
         });
     };
 
     const destroySpecificId = (id: any) => {
-        const item = modalControl.find((e) => e.id === id);
+        const item = modalControl.find(e => e.id === id);
         if (item) {
             const { element } = item;
             element?.destroy();
             // destroy id
-            const arrFilter = modalControl.filter((e) => e.id !== id);
+            const arrFilter = modalControl.filter(e => e.id !== id);
             modalControl = [...arrFilter];
         }
     };

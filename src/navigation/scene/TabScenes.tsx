@@ -58,7 +58,9 @@ const MainTabContainer = () => {
         },
     ];
     return (
-        <MainTab.Navigator tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
+        <MainTab.Navigator
+            screenOptions={{ headerShown: false }}
+            tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
             {ArrayTabs.map((item, index) => (
                 <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />
             ))}

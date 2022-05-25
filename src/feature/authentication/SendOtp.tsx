@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { checkVerifyCode, forgotPassword, getVerifyCode, register } from 'api/modules/api-app/authenticate';
 import { Themes } from 'assets/themes';
 import { StyledButton, StyledText, StyledTouchable } from 'components/base';
@@ -41,7 +42,7 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
                     AlertMessage(t('alert.invalidOTP'));
                 }
             }
-        } catch (error) {
+        } catch (error: any) {
             logger(error);
             AlertMessage(error);
         }
@@ -56,7 +57,7 @@ const SendOTP: FunctionComponent = ({ route }: any) => {
             }
             await forgotPassword(email);
             AlertMessage(t('alert.success'));
-        } catch (error) {
+        } catch (error: any) {
             AlertMessage(error);
         }
     };

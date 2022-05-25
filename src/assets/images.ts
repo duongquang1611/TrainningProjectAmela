@@ -17,6 +17,7 @@ const Images = {
     },
     photo: {
         defaultImage: require('./photo/img_default_image.png'),
+        introImage: require('./photo/img_intro.png'),
     },
 };
 

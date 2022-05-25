@@ -40,7 +40,7 @@ const ChangePassword: FunctionComponent = ({ route }: any) => {
         try {
             await resetPassword(email, password, code);
             navigate(AUTHENTICATE_ROUTE.LOGIN);
-        } catch (error) {
+        } catch (error: any) {
             AlertMessage(error);
         }
     };
@@ -53,8 +53,7 @@ const ChangePassword: FunctionComponent = ({ route }: any) => {
                     contentContainerStyle={styles.contentContainer}
                     enableOnAndroid={true}
                     enableAutomaticScroll={isIos}
-                    showsVerticalScrollIndicator={false}
-                >
+                    showsVerticalScrollIndicator={false}>
                     <FormProvider {...form}>
                         <StyledInputForm
                             name={'oldPassword'}

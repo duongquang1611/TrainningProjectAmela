@@ -1,4 +1,3 @@
-import Metrics from 'assets/metrics';
 import { Themes } from 'assets/themes';
 import React, { useState, forwardRef, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -6,13 +5,13 @@ import {
     ColorValue,
     ReturnKeyTypeOptions,
     StyleProp,
-    StyleSheet,
     TextInput,
     TextInputProps,
     TextStyle,
     View,
     ViewStyle,
 } from 'react-native';
+import { ScaledSheet } from 'react-native-size-matters';
 import { autoCompleteType, textContentType } from 'utilities/CommonInterface';
 import StyledText from './StyledText';
 
@@ -67,12 +66,12 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
         </View>
     );
 };
-const styles: any = StyleSheet.create({
+const styles = ScaledSheet.create({
     textInput: {
-        width: Metrics.screenWidth * 0.8,
-        borderRadius: 20,
-        padding: 10,
-        backgroundColor: Themes.COLORS.secondary,
+        width: '327@s',
+        height: '52@vs',
+        padding: '10@s',
+        backgroundColor: Themes.COLORS.white,
     },
     errorMessage: {
         fontSize: 12,
@@ -81,7 +80,8 @@ const styles: any = StyleSheet.create({
     },
     container: {
         marginVertical: 8,
-        width: Metrics.screenWidth * 0.8,
+        // width: Metrics.screenWidth * 0.8,
+        backgroundColor: 'blue',
     },
 });
 export default forwardRef(StyledInput);

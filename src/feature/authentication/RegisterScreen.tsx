@@ -47,8 +47,7 @@ const RegisterScreen: FunctionComponent = () => {
         <KeyboardAwareScrollView
             contentContainerStyle={styles.container}
             enableOnAndroid={true}
-            showsVerticalScrollIndicator={false}
-        >
+            showsVerticalScrollIndicator={false}>
             <SafeAreaView style={styles.body}>
                 <FormProvider {...form}>
                     <StyledInputForm

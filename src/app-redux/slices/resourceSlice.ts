@@ -15,7 +15,7 @@ const initialState: IResourceState = {
     status: CommonStatus.IDLE,
 };
 
-const getResourceRequest: Reducer = (state) => {
+const getResourceRequest: Reducer = (state: any) => {
     state.status = CommonStatus.LOADING;
     delete state.resource;
     delete state.error;

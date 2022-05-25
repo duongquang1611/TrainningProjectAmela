@@ -70,6 +70,7 @@ const usePagingTakeAfter = (
     const runRequest = (otherParams?: any) => {
         const paramsQuery = {
             pageSize,
+            // eslint-disable-next-line no-unsafe-optional-chaining
             takeAfter: list?.[list?.length - 1]?.lastTimeSent,
             ...otherParams,
         };

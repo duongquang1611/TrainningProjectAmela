@@ -19,7 +19,8 @@ const AppStack = () => (
 );
 
 const Navigation: React.FunctionComponent = () => {
-    const { token } = useAppSelector((state) => state.userInfo);
+    const { token } = useAppSelector(state => state.userInfo);
+    return <AppStack />;
     if (token) {
         return <AppStack />;
     }
