@@ -16,7 +16,7 @@ const StyledWebView = (props: WebViewProps) => {
                         <ActivityIndicator size={'large'} />
                     </View>
                 )}
-                renderError={(errorName) => (
+                renderError={errorName => (
                     <View style={styles.flex1}>
                         <StyledText originValue={`Error name: ${errorName}`} />
                         <StyledText customStyle={styles.textPullDown} originValue={'Pull down to try again'} />

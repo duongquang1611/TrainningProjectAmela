@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { StyleProp, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { Themes } from 'assets/themes';
+import { StyleProp, ViewStyle, TextStyle } from 'react-native';
+import { ScaledSheet } from 'react-native-size-matters';
 import { StyledText, StyledTouchable } from '.';
 
 interface StyledButtonProps {
@@ -19,23 +19,20 @@ const StyledButton: FunctionComponent<StyledButtonProps> = (props: StyledButtonP
             customStyle={[styles.container, customStyle]}
             onPress={onPress}
             onLongPress={onLongPress}
-            disabled={disabled}
-        >
+            disabled={disabled}>
             <StyledText i18nText={title} customStyle={customStyleText} />
         </StyledTouchable>
     );
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     container: {
-        paddingVertical: 10,
-        width: 128,
-        borderColor: Themes.COLORS.primary,
+        width: '327@s',
+        height: '52@vs',
+        backgroundColor: 'red',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10,
-        borderWidth: 1,
-        marginTop: 10,
+        alignSelf: 'center',
     },
 });
 

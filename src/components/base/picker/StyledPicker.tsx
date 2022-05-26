@@ -82,8 +82,7 @@ const StyledPicker = (props: PickerProps) => {
                 activeOpacity={0.9}
                 onPress={handleShowPicker}
                 style={[styles.contWholePicker, props.customStyle]}
-                disabled={props.isPickerDisable || false}
-            >
+                disabled={props.isPickerDisable || false}>
                 <View style={styles.contTxtItem}>
                     <StyledText
                         originValue={currentLabel || item}

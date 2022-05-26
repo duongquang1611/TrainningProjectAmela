@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import { notificationRead } from 'api/modules/api-app/notification';
 import { store } from 'app-redux/store';
 import { useEffect } from 'react';
@@ -7,7 +8,7 @@ import { isLogin } from 'utilities/authenticate/AuthenticateService';
 import { logger } from 'utilities/helper';
 
 type NotificationReceivedEvent = {
-    complete: (notification?: OSNotification) => void;
+    complete: (notification?: any) => void;
     getNotification: () => OSNotification;
 };
 
@@ -34,7 +35,7 @@ export async function onMoveNavigation(data: any) {
         try {
             await notificationRead(data.id);
             // Navigate
-        } catch (error) {
+        } catch (error: any) {
             logger(error);
         }
     }
@@ -73,7 +74,7 @@ export const useOnesignal = (user?: any) => {
                 }
                 OneSignal.setNotificationWillShowInForegroundHandler(onReceived);
                 OneSignal.setNotificationOpenedHandler(handleNavigateNotification);
-            } catch (error) {
+            } catch (error: any) {
                 logger(error);
             }
         }, 200);

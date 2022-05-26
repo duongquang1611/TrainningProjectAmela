@@ -15,7 +15,7 @@ const initSlice = createSlice({
         addData: (state, action: PayloadAction<any>) => {
             state.data.push(action.payload);
         },
-        clearData: (state) => {
+        clearData: (state: any) => {
             state.data = [];
         },
     },

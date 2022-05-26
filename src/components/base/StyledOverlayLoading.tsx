@@ -41,8 +41,7 @@ const StyledOverlayLoading: any = (props: Props) => {
                 onRequestClose={props.onRequestClose}
                 supportedOrientations={['portrait']}
                 transparent
-                visible={props.visible}
-            >
+                visible={props.visible}>
                 <Spinner />
             </Modal>
         );
@@ -60,8 +59,7 @@ const StyledOverlayLoading: any = (props: Props) => {
                         backgroundColor: 'rgba(0,0,0,0.4)',
                         alignItems: 'center',
                         justifyContent: 'center',
-                    }}
-                >
+                    }}>
                     <Spinner />
                 </View>
             )

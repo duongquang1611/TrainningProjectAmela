@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-underscore-dangle */
 import { getProfile } from 'api/modules/api-app/authenticate';
 import { getMessage } from 'api/modules/api-app/chat';
@@ -57,7 +58,7 @@ export const useSocket = (id?: string) => {
     const userInfo = useSelector((state: any) => state?.userInfo);
     const [messages, setMessages] = useState<any>([]);
     // tuy vao tung api detail user User Data se khac nhau
-    const [dataUser, setUser] = useState({
+    const [dataUser] = useState({
         _id: Number(`1${userInfo?.honbuId}`),
         name: userInfo?.honbuName,
     });
@@ -150,6 +151,7 @@ export const useSocket = (id?: string) => {
             },
             (res: any) => {
                 cb?.();
+                console.log(res);
             },
         );
     };
@@ -164,6 +166,7 @@ export const useSocket = (id?: string) => {
         socket.off('reconnect');
         socket.on('reconnect', (attempt: any) => {
             emitJoinRoom(getListMessage);
+            console.log(attempt);
         });
     };
     const sendMessage = (obj: any) => {

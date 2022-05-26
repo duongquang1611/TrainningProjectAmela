@@ -28,7 +28,7 @@ const SendEmailScreen: FunctionComponent = ({ route }: any) => {
         try {
             await forgotPassword(email);
             navigate(AUTHENTICATE_ROUTE.SEND_OTP, { email });
-        } catch (error) {
+        } catch (error: any) {
             AlertMessage(error);
         }
     };
@@ -40,8 +40,7 @@ const SendEmailScreen: FunctionComponent = ({ route }: any) => {
                     contentContainerStyle={styles.contentContainer}
                     enableOnAndroid={true}
                     enableAutomaticScroll={isIos}
-                    showsVerticalScrollIndicator={false}
-                >
+                    showsVerticalScrollIndicator={false}>
                     <StyledInputForm
                         name={'email'}
                         placeholder={t('authen.register.emailPlaceholder')}

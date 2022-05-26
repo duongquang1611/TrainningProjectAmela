@@ -47,7 +47,7 @@ const CodePushProgressDialog = () => {
                 },
                 deploymentKey: codePushKey,
             },
-            (status) => {
+            status => {
                 switch (status) {
                     case codePush.SyncStatus.DOWNLOADING_PACKAGE:
                         setIsVisible(true);
@@ -64,7 +64,7 @@ const CodePushProgressDialog = () => {
                         break;
                 }
             },
-            (progress) => {
+            progress => {
                 const currentProgress = +progress.receivedBytes / +progress.totalBytes;
                 setProgress(currentProgress);
                 if (currentProgress === 1) {
@@ -77,7 +77,7 @@ const CodePushProgressDialog = () => {
         );
     };
     const checkForUpdate = () => {
-        codePush.checkForUpdate(codePushKey).then((update) => update && syncCodepush());
+        codePush.checkForUpdate(codePushKey).then(update => update && syncCodepush());
     };
 
     return (
@@ -86,8 +86,7 @@ const CodePushProgressDialog = () => {
             animationIn="slideInUp"
             animationOut="slideOutDown"
             backdropColor={Themes.COLORS.backdropModalUpdate}
-            isVisible={isVisible}
-        >
+            isVisible={isVisible}>
             <View style={styles.container}>
                 <Text numberOfLines={1} style={styles.header}>
                     {i18next.t('syncUpdate.appUpdate')}

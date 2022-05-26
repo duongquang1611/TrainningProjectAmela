@@ -21,10 +21,9 @@ const ModalizeCenterComponent = (props: Props) => {
         <View style={[styles.container, customContainerStyle]}>
             <StyledTouchable onPress={handleDismiss} customStyle={{ height: lowerBackdropHeight }} />
             <View
-                onLayout={(event) => {
+                onLayout={event => {
                     setContentHeight(event?.nativeEvent?.layout?.height);
-                }}
-            >
+                }}>
                 {children}
             </View>
             <StyledTouchable onPress={handleDismiss} customStyle={{ height: lowerBackdropHeight }} />

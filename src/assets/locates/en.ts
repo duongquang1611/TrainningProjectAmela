@@ -110,4 +110,29 @@ export default {
         inputComponent:
             'You need to wrap input by Form Provider or passing "form = useForm( ... )" into input component.',
     },
+    intro: {
+        titleIntro: '元気',
+        titleIntro_two: 'SUITE SELECTION',
+        txt: 'スイートセレクションは、質の高いプロフェッショナルと、質を求',
+        txtLogin: 'ログイン',
+        txtRegister: '新規登録',
+        txtAccount: 'Đăng nhập với tài khoản khách',
+    },
+    login: {
+        titleRegister: 'ログイン',
+        forget: 'パスワードを忘れた',
+        sub: 'ログイン',
+        bottom: 'アカウントを持っていない方は',
+        atHere: 'こちらへ',
+        content: '電話番号/メールアドレス',
+        pass: 'パスワード',
+    },
+    register: {
+        title: '新規登録',
+        name: 'ユーザー名',
+        phone: '電話番号/メールアドレス',
+        pass: 'パスワード',
+        resetPass: '再パスワード',
+        submit: '新規登録',
+    },
 };

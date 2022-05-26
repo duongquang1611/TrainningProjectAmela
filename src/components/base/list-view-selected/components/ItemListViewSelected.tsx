@@ -23,15 +23,13 @@ const ItemListViewSelected = (propsItem: ItemListProps) => {
                     backgroundColor: propsItem.isActive ? Themes.COLORS.secondary : Themes.COLORS.white,
                     borderColor: propsItem.isActive ? Themes.COLORS.secondary : Themes.COLORS.black,
                 },
-            ]}
-        >
+            ]}>
             <Text
                 style={[
                     styles.text,
                     propsItem.customStyleText,
                     { color: propsItem.isActive ? Themes.COLORS.white : Themes.COLORS.black },
-                ]}
-            >
+                ]}>
                 {propsItem.name}
             </Text>
         </TouchableOpacity>
