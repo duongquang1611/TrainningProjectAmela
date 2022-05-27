@@ -44,13 +44,13 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
                             source={options?.icon}
                             style={[
                                 styles.tabIcon,
-                                { tintColor: isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary },
+                                { tintColor: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.textPrimary },
                             ]}
                         />
                         <StyledText
                             customStyle={[
                                 styles.tabLabel,
-                                { color: isFocused ? Themes.COLORS.primary : Themes.COLORS.textPrimary },
+                                { color: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.textPrimary },
                             ]}
                             i18nText={options?.title || ''}
                         />

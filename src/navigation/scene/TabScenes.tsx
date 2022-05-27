@@ -1,7 +1,9 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
+import en from 'assets/locates/en';
 import AccountView from 'feature/account/AccountView';
+import FollowScreem from 'feature/follow/FollowScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import HomeDetailScreen from 'feature/home/HomeDetailScreen';
 // Screen
@@ -55,6 +57,12 @@ const MainTabContainer = () => {
             title: t('tab.account'),
             component: AccountView,
             icon: Images.icons.tab.account,
+        },
+        {
+            name: TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW,
+            title: t(en.follow.tabFollow),
+            component: FollowScreem,
+            icon: Images.icons.tab.follow,
         },
     ];
     return (

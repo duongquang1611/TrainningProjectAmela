@@ -23,6 +23,7 @@ const Light = {
         selectiveYellow: '#FFB900',
         white: '#FFFFFF',
         oxfordBlue: '#353A50',
+        sliver: '#C4C4C4',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',
