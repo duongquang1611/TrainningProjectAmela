@@ -1,23 +1,19 @@
 import React, { FunctionComponent } from 'react';
-import { StyleSheet, View } from 'react-native';
-import StyledText from 'components/base/StyledText';
-import { StyledButton } from 'components/base';
-import AuthenticateService from 'utilities/authenticate/AuthenticateService';
+import { View } from 'react-native';
+// import { StyleSheet, View } from 'react-native';
+// import { StyledButton } from 'components/base';
+// import AuthenticateService from 'utilities/authenticate/AuthenticateService';
+import { ScaledSheet } from 'react-native-size-matters';
 
 const SettingView: FunctionComponent = () => {
-    return (
-        <View style={styles.container}>
-            <StyledText originValue={'Setting'} />
-            <StyledButton onPress={AuthenticateService.logOut} title={'Log out'} />
-        </View>
-    );
+    return <View style={styles.container} />;
 };
 
-const styles = StyleSheet.create({
+const styles = ScaledSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
+        marginHorizontal: '20@ms',
+        backgroundColor: 'red',
     },
 });
 

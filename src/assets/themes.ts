@@ -24,6 +24,9 @@ const Light = {
         white: '#FFFFFF',
         oxfordBlue: '#353A50',
         sliver: '#C4C4C4',
+        red: 'red',
+        darkOrange: '#FF8C00',
+        LightGray: '#D3D3D3',
     },
     FONTS: {
         defaultFont: 'Montserrat-Regular',
