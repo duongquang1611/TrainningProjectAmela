@@ -1,3 +1,5 @@
+import en from 'assets/locates/en';
+
 export const staticValue = {
     DEFAULT: 1,
     TIME_IMAGE_LOAD: 500,
@@ -19,4 +21,22 @@ export const dataPicker = [
     'label8',
     'label9',
     'label10',
+];
+
+export const DATA = [
+    {
+        id: 1,
+        name: en.follow.name,
+        content: en.follow.content,
+    },
+    {
+        id: 2,
+        name: en.follow.name,
+        content: en.follow.content,
+    },
+    {
+        id: 3,
+        name: en.follow.name,
+        content: en.follow.content,
+    },
 ];

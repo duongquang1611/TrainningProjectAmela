@@ -135,4 +135,13 @@ export default {
         resetPass: '再パスワード',
         submit: '新規登録',
     },
+    follow: {
+        title: 'メッセージ',
+        all: '全て',
+        noread: '未読',
+        seen: '既読',
+        name: 'かおり',
+        content: '新着メッセージの内容',
+        tabFollow: 'フォロー',
+    },
 };
