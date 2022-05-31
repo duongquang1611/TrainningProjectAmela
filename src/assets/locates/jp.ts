@@ -49,6 +49,7 @@ export default {
         notification: '通知',
         setting: '設定',
         account: 'アカウント',
+        tabFollow: 'フォロー',
     },
     authen: {
         login: {
@@ -134,5 +135,19 @@ export default {
         pass: 'パスワード',
         resetPass: '再パスワード',
         submit: '新規登録',
+    },
+    follow: {
+        title: 'メッセージ',
+        all: '全て',
+        noread: '未読',
+        seen: '既読',
+        name: 'かおり',
+        content: '新着メッセージの内容',
+    },
+    vocabulary: {
+        grammar: 'Vocabulary - Kanji - Grammar',
+        time: '00 : 49 : 52',
+        complete: 'Complete',
+        title: '次の言葉 (の使 。い方 。最も)',
     },
 };
