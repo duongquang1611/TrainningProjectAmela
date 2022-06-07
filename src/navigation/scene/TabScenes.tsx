@@ -1,12 +1,10 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
-import en from 'assets/locates/en';
 import AccountView from 'feature/account/AccountView';
 import FollowScreem from 'feature/follow/FollowScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import HomeDetailScreen from 'feature/home/HomeDetailScreen';
-// Screen
 import HomeScreen from 'feature/home/HomeScreen';
 import HomeUserListScreen from 'feature/home/HomeUserListScreen';
 import NotificationScreen from 'feature/notification/NotificationScreen';
@@ -60,7 +58,7 @@ const MainTabContainer = () => {
         },
         {
             name: TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW,
-            title: t(en.follow.tabFollow),
+            title: t('tab.tabFollow'),
             component: FollowScreem,
             icon: Images.icons.tab.follow,
         },
@@ -68,6 +66,7 @@ const MainTabContainer = () => {
     return (
         <MainTab.Navigator
             screenOptions={{ headerShown: false }}
+            initialRouteName={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW}
             tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
             {ArrayTabs.map((item, index) => (
                 <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />

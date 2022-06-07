@@ -44,13 +44,13 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
                             source={options?.icon}
                             style={[
                                 styles.tabIcon,
-                                { tintColor: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.textPrimary },
+                                { tintColor: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.white },
                             ]}
                         />
                         <StyledText
                             customStyle={[
                                 styles.tabLabel,
-                                { color: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.textPrimary },
+                                { color: isFocused ? Themes.COLORS.selectiveYellow : Themes.COLORS.white },
                             ]}
                             i18nText={options?.title || ''}
                         />
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         alignItems: Platform.OS === 'ios' ? 'flex-end' : 'center',
         height: '8%',
+        backgroundColor: 'black',
     },
     tabButton: {
         alignItems: 'center',
