@@ -8,14 +8,15 @@ import { logger } from 'utilities/helper';
 import { memo } from 'react';
 import { Resource } from 'utilities/i18next';
 
+export type I18Type = Normalize<Resource>;
 interface StyledTextProps extends TextProps {
     customStyle?: StyleProp<TextStyle>;
     i18nParams?: any;
 }
 
 interface StyledTextWithOriginValue extends StyledTextProps {
-    originValue: string;
-    i18nText?: never;
+    originValue?: never;
+    i18nText?: I18Type;
 }
 
 interface StyledTextWithI18nValue extends StyledTextProps {
@@ -37,7 +38,7 @@ const StyledText = (props: StyledTextCombineProps) => {
     if (originValue) {
         value = originValue;
     } else if (i18nText || i18next.exists(i18nText || '', i18nParams)) {
-        value = t(i18nText as Normalize<Resource>, i18nParams);
+        value = t(i18nText as I18Type, i18nParams);
     } else {
         value = i18nText || '';
     }
