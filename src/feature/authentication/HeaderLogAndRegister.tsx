@@ -1,15 +1,19 @@
 import { Themes } from 'assets/themes';
-import { StyledIcon, StyledText } from 'components/base';
-import React from 'react';
+import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
+import React, { memo } from 'react';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 
 const HeaderLogAndRegister = (props: any) => {
-    const { title, customStyle, img, customStyleIcon } = props;
+    const { title, customStyle, img, customStyleIcon, onPressIconRight } = props;
     return (
         <View style={styles.container}>
             {Boolean(title) && <StyledText i18nText={title} customStyle={customStyle} />}
-            {Boolean(img) && <StyledIcon source={img} size={26} customStyle={customStyleIcon} />}
+            {Boolean(img) && (
+                <StyledTouchable onPress={onPressIconRight}>
+                    <StyledIcon source={img} size={26} customStyle={customStyleIcon} />
+                </StyledTouchable>
+            )}
         </View>
     );
 };
@@ -25,4 +29,4 @@ const styles = ScaledSheet.create({
     },
 });
 
-export default HeaderLogAndRegister;
+export default memo(HeaderLogAndRegister);

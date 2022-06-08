@@ -18,7 +18,7 @@ const DEFAULT_FORM: any = {
     confirmPassword: '12345678',
 };
 
-const AccountView = () => {
+const AccountVieww = () => {
     const schema = yup.object().shape({
         username: yupValidate.name(),
         email: yupValidate.email(),
@@ -28,7 +28,7 @@ const AccountView = () => {
     });
     const form = useForm({
         mode: 'onChange', // validate form onChange
-        defaultValues: DEFAULT_FORM,
+        // defaultValues: DEFAULT_FORM,
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
         criteriaMode: 'firstError', // first error from each field will be gathered.
@@ -36,8 +36,11 @@ const AccountView = () => {
     const {
         formState: { isValid },
         setValue,
+        getValues,
         handleSubmit,
     } = form;
+
+    console.log('VALUE', getValues('username'));
 
     const onSubmit = (formData: any) => {
         AlertMessage(JSON.stringify(formData), 'Form Data');
@@ -58,7 +61,14 @@ const AccountView = () => {
             showsVerticalScrollIndicator={false}
             enableResetScrollToCoords={false}>
             <FormProvider {...form}>
-                <StyledInputForm name={'username'} label="Username" returnKeyType="next" />
+                <StyledInputForm
+                    name={'username'}
+                    label="Username"
+                    returnKeyType="next"
+                    onChangeText={(text: string) => {
+                        setValue('username', text);
+                    }}
+                />
                 <StyledInputForm name={'email'} label="Email" />
                 <StyledInputForm name={'phone'} label="Phone Number" />
                 <StyledInputForm secureTextEntry={true} name={'password'} label="Password" />
@@ -98,4 +108,4 @@ const styles = ScaledSheet.create({
     },
 });
 
-export default AccountView;
+export default AccountVieww;

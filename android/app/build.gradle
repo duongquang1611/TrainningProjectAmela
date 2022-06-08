@@ -1,5 +1,11 @@
 apply plugin: "com.android.application"
 
+project.ext.envConfigFiles = [
+    dev: ".env.development",
+    staging: ".env.staging",
+    product: ".env.production",
+    anothercustombuild: ".env",
+]
 import com.android.build.OutputFile
 import org.apache.tools.ant.taskdefs.condition.Os
 
@@ -83,6 +89,7 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -135,13 +142,13 @@ android {
     compileSdkVersion rootProject.ext.compileSdkVersion
 
     defaultConfig {
-        applicationId "com.demoapp"
+        applicationId env.get("ANDROID_APP_ID")
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode Integer.valueOf(env.get("ANDROID_APP_VERSION_CODE"))
+        versionName env.get("ANDROID_APP_VERSION_NAME")
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
-
+        resValue "string", "build_config_package", "com.demoapp"
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
@@ -222,12 +229,31 @@ android {
         }
     }
     signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
+       debug {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWORD
         }
+        development {
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWORD
+        }
+        staging {
+            storeFile file(STAGING_STORE_FILE)
+            storePassword STAGING_STORE_PASSWORD
+            keyAlias STAGING_KEY_ALIAS
+            keyPassword STAGING_KEY_PASSWORD
+        }
+        product {
+            storeFile file(PRODUCT_STORE_FILE)
+            storePassword PRODUCT_STORE_PASSWORD
+            keyAlias PRODUCT_KEY_ALIAS
+            keyPassword PRODUCT_KEY_PASSWORD
+        }
+
     }
     buildTypes {
         debug {
@@ -239,6 +265,24 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+  flavorDimensions "enviroment"
+    productFlavors {
+        dev {
+            dimension "enviroment"
+            resValue "string", "app_name", project.env.get("APP_NAME")
+            signingConfig signingConfigs.debug
+        }
+        staging {
+            dimension "enviroment"
+            resValue "string", "app_name", project.env.get("APP_NAME")
+            signingConfig signingConfigs.staging
+        }
+        product {
+            dimension "enviroment"
+            resValue "string", "app_name", project.env.get("APP_NAME")
+            signingConfig signingConfigs.product
         }
     }
 

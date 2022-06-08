@@ -15,7 +15,7 @@ const yupValidate = {
     name: () =>
         yup
             .string()
-            .required(() => requireField('name'))
+            .required(() => requireField('username'))
             .trim(i18next.t('error.trimSpace'))
             .strict(true)
             .min(USERNAME_MIN_LENGTH, i18next.t('error.nameLength'))
@@ -42,6 +42,28 @@ const yupValidate = {
      * password(ref, false) : input newPassword, have not to be the same with currentPassword
      */
     password: (ref?: string, isMatchCurrentPassword = true): any => {
+        if (ref) {
+            // NEW PASSWORD
+            if (!isMatchCurrentPassword)
+                return yupValidate.password().not([yup.ref(ref), null], i18next.t('error.duplicatePassword'));
+
+            // CONFIRM PASSWORD
+            return yup
+                .string()
+                .required(() => requireField('passwordConfirm'))
+                .oneOf([yup.ref(ref), null], i18next.t('error.passwordNotMatch'));
+        }
+
+        return yup
+            .string()
+            .required(() => requireField('password'))
+            .trim(i18next.t('error.trimSpace'))
+            .strict(true)
+            .min(PASSWORD_MIN_LENGTH, i18next.t('error.passwordLength'))
+            .max(PASSWORD_MAX_LENGTH, i18next.t('error.passwordLength'))
+            .matches(REGEX_PASSWORD, i18next.t('error.validatePassword'));
+    },
+    newPassWord: (ref?: string, isMatchCurrentPassword = true): any => {
         if (ref) {
             // NEW PASSWORD
             if (!isMatchCurrentPassword)
