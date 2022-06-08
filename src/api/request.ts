@@ -8,18 +8,19 @@ import { apiLogger } from 'utilities/logger';
 import { ERRORS } from 'utilities/staticData';
 import i18next from 'utilities/i18next';
 
-const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}auth/refresh-token`;
+const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}v1/app/auth/request-access-token`;
 let hasAnyNetworkDialogShown = false;
 
+// cấu hình axios
 const request = axios.create({
-    baseURL: Config.API_URL,
+    baseURL: 'https://training-api.test.amela.vn' || Config.API_URL,
     timeout: 8000,
     headers: { Accept: '*/*' },
 });
 // for multiple requests
 let isRefreshing = false;
 let failedQueue: any = [];
-
+// lưu lại những API chết khi có token mới gọi lại (401) và call lại
 const processQueue = (error: any, token: string | null | undefined = null) => {
     failedQueue.forEach((prom: any) => {
         if (error) {
@@ -28,10 +29,13 @@ const processQueue = (error: any, token: string | null | undefined = null) => {
             prom.resolve(token);
         }
     });
+    console.log('failed', failedQueue);
 
     failedQueue = [];
 };
+console.log('processQueue', processQueue);
 
+// (chưa hiểu)
 const rejectError = (err: string, validNetwork: boolean) => {
     // Avoid being null
     if (validNetwork !== false) {
@@ -39,16 +43,19 @@ const rejectError = (err: string, validNetwork: boolean) => {
     }
     return Promise.reject(i18next.t(ERRORS.network));
 };
-
+// Request interceptor for API calls : yêu cầu đánh chặn cho các cuộc gọi API
 request.interceptors.request.use(
     async (config: any) => {
         // Do something before API is sent
-        const token = TokenProvider.getToken();
+        const token = TokenProvider.getToken(); // lấy token từ userInfo kiểm tra
+        console.log('token', token);
+
         if (token) {
-            config.headers.Authorization = `Bearer ${token}`;
+            config.headers.Authorization = `Bearer ${token}`; // có token tiếp tục đăng nhập  config.Authorization : ủy quyền đăng nhập tiép
         }
         return config;
     },
+    // Không có config từ request trả ra lỗi  và báo lỗi
     (error: any) => {
         // Do something with API error
         apiLogger(
@@ -59,7 +66,7 @@ request.interceptors.request.use(
         return Promise.reject(error);
     },
 );
-
+// Response interceptor for API calls : Trao đổi phản hồi cho các cuộc gọi API
 request.interceptors.response.use(
     (response: any) => response.data,
     async (error: any) => {
@@ -83,7 +90,9 @@ request.interceptors.response.use(
             'background: red; color: #fff',
             error.response,
         );
-        const originalRequest = error.config;
+        const originalRequest = error.config; // cấu hình lỗi
+        console.log('originalRequest', originalRequest);
+        // check các trạng thái lỗi  của token cần refesh token
         if (errorMessage === 'RefreshToken_NotExist') {
             logger('RefreshToken_NotExist => logout');
             // Logout here
@@ -108,16 +117,19 @@ request.interceptors.response.use(
             logger('refreshing token...');
             originalRequest.retry = true;
             isRefreshing = true;
-            const localRefreshToken = TokenProvider.getRefreshToken();
+            // get token mới từ refesh token
+            const localRefreshToken = TokenProvider.getRefreshToken(); // tạo 1 biến localRefreshToken lấy từ tokenProvider để lấy đc token mới nhất
             try {
+                // call API refessh token
                 const refreshTokenResponse = await axios.post(AUTH_URL_REFRESH_TOKEN, {
-                    refreshToken: localRefreshToken,
+                    refreshToken: localRefreshToken, // gán refreshToken vào localRefreshToken
                 });
-                const { token, refreshToken } = refreshTokenResponse.data;
-                TokenProvider.setAllNewToken(token, refreshToken);
-                originalRequest.headers.Authorization = `Bearer ${token}`;
-                processQueue(null, token);
+                const { token, refreshToken } = refreshTokenResponse.data; // lấy token và refresh  từ refreshTokenResponse
+                TokenProvider.setAllNewToken(token, refreshToken); // update token mới cho userInfo  lưu vào "(userInfoActions.updateToken)"
+                originalRequest.headers.Authorization = `Bearer ${token}`; // ủy quyền truy cập với token mới
+                processQueue(null, token); // call những API đã chết
                 return request(originalRequest);
+                // nếu get  token lỗi out app
             } catch (err) {
                 // Logout here
                 AuthenticateService.logOut();

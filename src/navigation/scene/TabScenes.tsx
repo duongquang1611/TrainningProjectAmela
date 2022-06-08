@@ -1,7 +1,9 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
-import AccountView from 'feature/account/AccountView';
+import AccountHome from 'feature/account/AccountHome';
+import AccountViewUser from 'feature/account/AccountViewUser';
+import SearchUser from 'feature/account/SearchUser';
 import FollowScreem from 'feature/follow/FollowScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import HomeDetailScreen from 'feature/home/HomeDetailScreen';
@@ -14,13 +16,12 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { isIos } from 'utilities/helper';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 const HomeStack = () => (
-    <MainStack.Navigator headerMode={'none'} screenOptions={navigationConfigs} keyboardHandlingEnabled={isIos}>
+    <MainStack.Navigator screenOptions={navigationConfigs}>
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME} component={HomeScreen} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_DETAIL} component={HomeDetailScreen} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.WEB_VIEW} component={HomeDetailScreen} />
@@ -28,7 +29,19 @@ const HomeStack = () => (
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.HOME_ROUTE.HOME_USER_LIST} component={HomeUserListScreen} />
     </MainStack.Navigator>
 );
-
+const AccountView = () => (
+    <MainStack.Navigator screenOptions={navigationConfigs}>
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_HOME} component={AccountHome} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_PROFILE} component={AccountViewUser} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER} component={SearchUser} />
+    </MainStack.Navigator>
+);
+const SettingStack = () => (
+    <MainStack.Navigator screenOptions={navigationConfigs}>
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={SettingView} />
+        {/* <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountVieww} /> */}
+    </MainStack.Navigator>
+);
 const MainTabContainer = () => {
     const { t } = useTranslation();
     const ArrayTabs = [
@@ -47,7 +60,7 @@ const MainTabContainer = () => {
         {
             name: TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT,
             title: t('tab.setting'),
-            component: SettingView,
+            component: SettingStack,
             icon: Images.icons.tab.setting,
         },
         {
@@ -66,7 +79,7 @@ const MainTabContainer = () => {
     return (
         <MainTab.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW}
+            // initialRouteName={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW}
             tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
             {ArrayTabs.map((item, index) => (
                 <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />

@@ -6,7 +6,6 @@ import StyledIndicator from './StyledIndicator';
 import NoData from './StyledNoData';
 
 interface Props extends FlatListProps<any> {
-    [key: string]: any;
     FlatListComponent?: FunctionComponent<any>;
     loading?: boolean;
     data: any[];
@@ -21,6 +20,7 @@ interface Props extends FlatListProps<any> {
     customStyle?: any;
     onLoadMore?(): void;
     onNoDataRefresh?(): void;
+    [key: string]: any;
 }
 
 const StyledList = (props: Props, ref: any) => {

@@ -42,8 +42,14 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
             )}
             <TextInput
                 ref={ref || input}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
+                onFocus={() => {
+                    console.log('focus');
+                    setIsFocused(true);
+                }}
+                onBlur={() => {
+                    console.log('blur');
+                    setIsFocused(false);
+                }}
                 style={[
                     styles.textInput,
                     props.customStyle,
@@ -60,7 +66,7 @@ const StyledInput = (props: StyledInputProps, ref: any) => {
                 blurOnSubmit={!!props.customReturnKeyType}
                 {...props}
             />
-            {!!props?.errorMessage && !isFocused && (
+            {!!props?.errorMessage && (
                 <StyledText i18nText={props.errorMessage} customStyle={[styles.errorMessage, props.customErrorStyle]} />
             )}
         </View>
@@ -74,7 +80,7 @@ const styles = ScaledSheet.create({
         backgroundColor: Themes.COLORS.white,
     },
     errorMessage: {
-        fontSize: 12,
+        fontSize: 10,
         color: Themes.COLORS.borderInputError,
         marginTop: 5,
     },
