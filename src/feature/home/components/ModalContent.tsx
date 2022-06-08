@@ -1,11 +1,9 @@
-import { Themes } from 'assets/themes';
+import { postAddTask } from 'api/modules/api-app/general';
+import { updateTodo } from 'app-redux/slices/nameTodoSlice';
 import { StyledInput, StyledButton } from 'components/base';
-import ModalizeManager from 'components/base/modal/ModalizeManager';
-import StyledPicker from 'components/base/picker/StyledPicker';
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { dataPicker } from 'utilities/staticData';
-import ModalContent2 from './ModalContent2';
+import { useDispatch } from 'react-redux';
 
 interface ModalContentProps {
     currentValue: any;
@@ -13,20 +11,83 @@ interface ModalContentProps {
     handleSetValue(currentValue: any): void;
     handleIncreaseNumber?(): void;
     closeModal?(): void;
+    dataID: any;
+    setData(prams: any): void;
+    modal: any;
+    setModal(fuc: any): boolean;
 }
 
 const ModalContent = (props: ModalContentProps) => {
-    const { handleSetValue } = props;
-    const modalize = ModalizeManager();
-    const [valuePicker, setValuePicker] = useState(dataPicker[0]);
-    const handleConfirm = (item: string) => {
-        setValuePicker(item);
+    const dispatch = useDispatch();
+    // const { namesList } = useSelector((state: RootState) => state.nameTodo); // get data from redux
+    // const { dataID } = props;
+    const [addName, setAddName] = useState('');
+    const [addContent, setAddContent] = useState('');
+
+    const handleClose = () => {
+        props?.closeModal?.();
+    };
+    const postAddTaskList = async () => {
+        try {
+            const responsePost = await postAddTask({
+                title: addName,
+                content: addContent,
+            });
+            dispatch(updateTodo(responsePost.data));
+        } catch (error) {
+            console.log(error);
+        }
     };
 
+    const handleAddItem = () => {
+        console.log('add item');
+
+        // if (!addName && !addContent) return alert('Bạn chưa nhập gì !!! ');
+        // const userId = namesList.length ? Math.max(...namesList.map((item: any) => item.id)) : 0;
+        // postAddTaskList(
+        //     dispatch(
+        //         updateNamesList({
+        //             // id: userId + 1,
+        //             title: addName,
+        //             content: addContent,
+        //         }),
+        //     ),
+        // );
+        // setAddName(addName);
+        // setAddContent('');
+        postAddTaskList();
+        props?.closeModal?.();
+        return null;
+    };
+
+    // handlePlusId();
+
+    // const { handleSetValue } = props;
+    // const modalize = ModalizeManager();
+    // const [valuePicker, setValuePicker] = useState(dataPicker[0]);
+    // const handleConfirm = (item: string) => {
+    //     setValuePicker(item);
+    // };
+    // const handleChangeName = (text: string) => {
+    //     setAddName(text);
+    // };
+    // const handleChangeContent = (textContent: string) => {
+    //     setAddContent(textContent);
+    // };
     return (
         <View style={styles.contModalContent}>
-            <StyledInput onChangeText={handleSetValue} placeholder="Please fill in input..." />
-            <StyledPicker
+            <StyledInput
+                customPlaceHolder="Please fill name in the input..."
+                value={addName}
+                onChangeText={setAddName}
+            />
+            <StyledInput
+                customPlaceHolder="Please fill content in input..."
+                value={addContent}
+                onChangeText={setAddContent}
+            />
+            <StyledButton title="Add Item" customStyle={styles.cssBtnAdd} onPress={handleAddItem} />
+            {/* <StyledPicker
                 currentValue={valuePicker}
                 dataList={dataPicker}
                 onConfirm={handleConfirm}
@@ -59,8 +120,8 @@ const ModalContent = (props: ModalContentProps) => {
                         disableScrollIfPossible: false,
                     });
                 }}
-            />
-            <StyledButton title={'Hide'} onPress={() => props?.closeModal?.()} />
+            /> */}
+            <StyledButton title={'Hide'} onPress={handleClose} />
         </View>
     );
 };
@@ -73,5 +134,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         paddingVertical: 20,
+    },
+    cssBtnAdd: {
+        marginVertical: 5,
     },
 });

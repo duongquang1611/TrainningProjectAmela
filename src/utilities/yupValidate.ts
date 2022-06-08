@@ -15,7 +15,7 @@ const yupValidate = {
     name: () =>
         yup
             .string()
-            .required(() => requireField('name'))
+            .required(() => requireField('username'))
             .trim(i18next.t('error.trimSpace'))
             .strict(true)
             .min(USERNAME_MIN_LENGTH, i18next.t('error.nameLength'))

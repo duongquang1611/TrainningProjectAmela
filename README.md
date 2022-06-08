@@ -126,6 +126,7 @@ Link assets and font from **src/assets** to Native project
 ## iOS: Fix error "No permission handled detected"
 
 1. Add this line to `Info.plist`:
+   NSPhotoLibraryUsageDescription
 
 ```
 <key>NSCameraUsageDescription</key>
