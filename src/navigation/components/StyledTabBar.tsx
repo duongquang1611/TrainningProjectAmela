@@ -1,6 +1,5 @@
 import React from 'react';
-import { Platform, View, Image, StyleSheet } from 'react-native';
-import Metrics from 'assets/metrics';
+import { View, Image, StyleSheet } from 'react-native';
 import { StyledText, StyledTouchable } from 'components/base';
 import { Themes } from 'assets/themes';
 import Size from 'assets/sizes';
@@ -64,13 +63,15 @@ const StyledTabBar = ({ state, descriptors, navigation }: any) => {
 const styles = StyleSheet.create({
     tabContainer: {
         flexDirection: 'row',
-        marginBottom: Platform.OS === 'ios' ? Metrics.safeBottomPadding : 0,
-        borderTopColor: '#DEE2E6',
+        // marginBottom: Platform.OS === 'ios' ? Metrics.safeBottomPadding : 0,
+
         justifyContent: 'space-around',
+        alignItems: 'center',
         borderTopWidth: 1,
-        alignItems: Platform.OS === 'ios' ? 'flex-end' : 'center',
-        height: '8%',
-        backgroundColor: 'black',
+        // borderTopColor: Themes.COLORS.grey,
+        // alignItems: Platform.OS === 'ios' ? 'flex-end' : 'center',
+        height: '10%',
+        backgroundColor: Themes.COLORS.ebonyClay,
     },
     tabButton: {
         alignItems: 'center',
@@ -79,11 +80,11 @@ const styles = StyleSheet.create({
         width: 17,
         height: 17,
         resizeMode: 'contain',
-        marginBottom: 5,
     },
     tabLabel: {
         paddingLeft: Size.PADDING.defaultTextPadding,
         textAlign: 'center',
+        alignItems: 'center',
     },
 });
 

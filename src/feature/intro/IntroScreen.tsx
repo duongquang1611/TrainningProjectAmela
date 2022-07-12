@@ -6,9 +6,12 @@ import { StyledButton, StyledText } from 'components/base';
 import { navigate } from 'navigation/NavigationService';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import { Themes } from 'assets/themes';
+// import { useDispatch } from 'react-redux';
 
+const { introImage } = Images.photo;
 const IntroScreen = () => {
-    const { introImage } = Images.photo;
+    // const dispatch = useDispatch();
+
     const handleLogin = () => {
         navigate(AUTHENTICATE_ROUTE.LOGINAPP);
     };

@@ -37,7 +37,6 @@ module.exports = {
         '@typescript-eslint/camelcase': 'off',
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'off',
-        'no-console': 1,
         'react/self-closing-comp': 'error',
         'unused-imports/no-unused-vars-ts': 'off',
         'no-multi-spaces': 'warn',
@@ -66,6 +65,8 @@ module.exports = {
         'no-param-reassign': 'off',
         '@typescript-eslint/explicit-module-boundary-types': ['off'],
         'react/display-name': 'off',
+        'no-console': 'off',
+        'import/no-unresolved': 'off',
     },
     parserOptions: {
         ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features

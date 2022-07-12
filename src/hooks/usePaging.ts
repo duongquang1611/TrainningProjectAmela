@@ -53,6 +53,8 @@ const usePaging = (requestPaging: (config: AxiosRequestConfig) => Promise<any>, 
             ...pagingData,
             noMore: true,
         });
+        console.log(otherParams, requestPageIndex, pageSize || SIZE_LIMIT);
+
         const res = await requestPaging({
             params: {
                 pageIndex: requestPageIndex,
