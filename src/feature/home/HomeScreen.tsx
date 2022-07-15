@@ -1,15 +1,15 @@
 import React, { FunctionComponent, useState } from 'react';
 // import { View, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { StyledButton } from 'components/base';
+import ModalizeManager from 'components/base/modal/ModalizeManager';
+import StyledPicker from 'components/base/picker/StyledPicker';
+import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 import StyledHeader from 'components/common/StyledHeader';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
+import { LogBox, StyleSheet, View } from 'react-native';
 import { wait } from 'utilities/helper';
-import StyledPicker from 'components/base/picker/StyledPicker';
-import ModalizeManager from 'components/base/modal/ModalizeManager';
 import { dataPicker } from 'utilities/staticData';
-import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
-import { StyledButton } from 'components/base';
-import { LogBox, View, StyleSheet } from 'react-native';
 import ModalContent from './components/ModalContent';
 
 LogBox.ignoreLogs(['ViewPropTypes will be removed', 'ColorPropType will be removed']);
@@ -34,7 +34,7 @@ const HomeScreen: FunctionComponent = () => {
 
     return (
         <View style={{ flex: 1 }}>
-            <StyledHeader title={'Home Screen'} />
+            <StyledHeader title={'Home Screen'} isBack={false} />
             <StyledOverlayLoading visible={isLoading} />
             <View style={styles.contScreen}>
                 <StyledPicker

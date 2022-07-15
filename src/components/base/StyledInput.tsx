@@ -12,15 +12,18 @@ import {
     ViewStyle,
 } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { autoCompleteType, textContentType } from 'utilities/CommonInterface';
-import StyledText from './StyledText';
+import { AutoCompleteType, TextContentType } from 'utilities/CommonInterface';
+import StyledText, { I18Type } from './StyledText';
+import StyledTouchable from './StyledTouchable';
 
 export interface StyledInputProps extends TextInputProps {
     containerStyle?: StyleProp<ViewStyle>;
     customStyle?: StyleProp<TextStyle>;
+    wrapInputStyle?: StyleProp<ViewStyle>;
     customLabelStyle?: StyleProp<TextStyle>;
     customErrorStyle?: StyleProp<TextStyle>;
     customPlaceHolder?: string;
+    customPlaceHolder?: I18Type;
     placeholderTextColor?: ColorValue;
     customUnderlineColor?: ColorValue;
     customReturnKeyType?: ReturnKeyTypeOptions;
@@ -29,39 +32,76 @@ export interface StyledInputProps extends TextInputProps {
     label?: string;
     textContentType?: textContentType;
     autoCompleteType?: autoCompleteType;
+    textContentType?: TextContentType;
+    autoCompleteType?: AutoCompleteType;
+    renderRight?: any;
+    onPress?: any;
 }
-
+const WrapInputComponent = ({ onPress, children, customStyle }: any) => {
+    return onPress ? (
+        <StyledTouchable customStyle={customStyle} onPress={onPress}>
+            {children}
+        </StyledTouchable>
+    ) : (
+        <View style={customStyle}>{children}</View>
+    );
+};
 const StyledInput = (props: StyledInputProps, ref: any) => {
     const [isFocused, setIsFocused] = useState(false);
     const input = useRef<TextInput>(null);
     const { t } = useTranslation();
+
+    const {
+        containerStyle,
+        label,
+        customStyle,
+        customLabelStyle,
+        customPlaceHolder,
+        customReturnKeyType = 'next',
+        renderRight,
+        errorMessage,
+        customErrorStyle,
+        placeholderTextColor = Themes.COLORS.grey,
+        customUnderlineColor = 'transparent',
+        autoCompleteType = 'off',
+        textContentType = 'none',
+        wrapInputStyle,
+        onPress,
+        ...otherProps
+    } = props;
     return (
-        <View style={[styles.container, props.containerStyle]}>
-            {!!props.label && (
-                <StyledText customStyle={[styles.label, props.customLabelStyle]} i18nText={props.label} />
-            )}
-            <TextInput
-                ref={ref || input}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-                style={[
-                    styles.textInput,
-                    props.customStyle,
-                    !isFocused && !!props?.errorMessage && { borderColor: Themes.COLORS.borderInputError },
+        <View style={[styles.container, containerStyle]}>
+            {!!label && <StyledText customStyle={[styles.label, customLabelStyle]} i18nText={label as I18Type} />}
+            <WrapInputComponent
+                customStyle={[
+                    wrapInputStyle,
+                    !isFocused && !!errorMessage && { borderColor: Themes.COLORS.borderInputError },
                 ]}
-                placeholderTextColor={props.placeholderTextColor || Themes.COLORS.grey}
-                placeholder={props.customPlaceHolder ? t(props.customPlaceHolder) : ''}
-                underlineColorAndroid={props.customUnderlineColor || 'transparent'}
-                autoCompleteType={props.autoCompleteType || 'off'}
-                textContentType={props.textContentType || 'none'}
-                importantForAutofill="yes"
-                autoCorrect={false}
-                returnKeyType={props.customReturnKeyType || 'next'}
-                blurOnSubmit={!!props.customReturnKeyType}
-                {...props}
-            />
-            {!!props?.errorMessage && !isFocused && (
-                <StyledText i18nText={props.errorMessage} customStyle={[styles.errorMessage, props.customErrorStyle]} />
+                onPress={onPress}>
+                <TextInput
+                    ref={ref || input}
+                    onFocus={() => setIsFocused(true)}
+                    onBlur={() => setIsFocused(false)}
+                    style={[
+                        styles.textInput,
+                        customStyle,
+                        !isFocused && !!errorMessage && { borderColor: Themes.COLORS.borderInputError },
+                    ]}
+                    placeholderTextColor={placeholderTextColor}
+                    placeholder={customPlaceHolder ? t(customPlaceHolder) : ''}
+                    underlineColorAndroid={customUnderlineColor}
+                    autoCompleteType={autoCompleteType}
+                    textContentType={textContentType}
+                    importantForAutofill="yes"
+                    autoCorrect={false}
+                    returnKeyType={customReturnKeyType}
+                    blurOnSubmit={!!customReturnKeyType}
+                    {...otherProps}
+                />
+                {!!renderRight && <View style={styles.rightView}>{renderRight?.()}</View>}
+            </WrapInputComponent>
+            {!!errorMessage && (
+                <StyledText i18nText={errorMessage as I18Type} customStyle={[styles.errorMessage, customErrorStyle]} />
             )}
         </View>
     );
@@ -71,17 +111,27 @@ const styles = ScaledSheet.create({
         width: '327@s',
         height: '52@vs',
         padding: '10@s',
+        borderRadius: '5@s',
         backgroundColor: Themes.COLORS.white,
     },
     errorMessage: {
-        fontSize: 12,
+        fontSize: '12@ms',
         color: Themes.COLORS.borderInputError,
-        marginTop: 5,
+        marginLeft: '5@s',
     },
     container: {
         marginVertical: 8,
         // width: Metrics.screenWidth * 0.8,
         backgroundColor: 'blue',
+        marginTop: '15@s',
+    },
+    label: {},
+    rightView: {
+        position: 'absolute',
+        right: '10@s',
+        height: '100%',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
 });
 export default forwardRef(StyledInput);

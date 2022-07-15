@@ -18,7 +18,7 @@ const DEFAULT_FORM: any = {
     confirmPassword: '12345678',
 };
 
-const AccountView = () => {
+const AccountVieww = () => {
     const schema = yup.object().shape({
         username: yupValidate.name(),
         email: yupValidate.email(),
@@ -108,4 +108,4 @@ const styles = ScaledSheet.create({
     },
 });
 
-export default AccountView;
+export default AccountVieww;
