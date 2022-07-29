@@ -9,6 +9,7 @@ import {
     REGEX_PHONE,
     USERNAME_MAX_LENGTH,
     USERNAME_MIN_LENGTH,
+    // MIN_AGE,
 } from './validate';
 
 const yupValidate = {

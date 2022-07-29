@@ -22,7 +22,11 @@ export interface StyledInputProps extends TextInputProps {
     wrapInputStyle?: StyleProp<ViewStyle>;
     customLabelStyle?: StyleProp<TextStyle>;
     customErrorStyle?: StyleProp<TextStyle>;
+<<<<<<< HEAD
     customPlaceHolder?: any;
+=======
+    customPlaceHolder?: string;
+>>>>>>> 5ce903e (taskDate)
     placeholderTextColor?: ColorValue;
     customUnderlineColor?: ColorValue;
     customReturnKeyType?: ReturnKeyTypeOptions;

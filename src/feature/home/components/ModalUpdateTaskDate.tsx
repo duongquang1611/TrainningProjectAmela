@@ -54,7 +54,7 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
 
     const handleEditTaskDate = async (formData: any) => {
         const cutStartTime = formData.startTime;
-        const resultStartTime = cutStartTime.split(' ', 3);
+        const resultStartTime = cutStartTime.split(' ');
         const resultEndTime = getValues('endTime').format(HHmm);
         try {
             await putUpdateTaskDate(todo.id, {

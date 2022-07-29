@@ -11,7 +11,11 @@ import { PermissionsAndroid, Platform, ScrollView, View } from 'react-native';
 const AccountHome = () => {
     const navigation = useNavigation();
     const [imageUp, setImage] = useState<any>();
+<<<<<<< HEAD
     const [imagesUp, setImages] = useState<any>();
+=======
+    const [imagesUp, setImages] = useState();
+>>>>>>> 5ce903e (taskDate)
 
     const upImgFromGallery = () => {
         ImagePicker.openPicker({

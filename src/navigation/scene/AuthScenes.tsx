@@ -14,6 +14,7 @@ const MainStack = createStackNavigator();
 
 const AuthStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
+        {/* <MainStack.Screen name={'acccccc'} component={AccountScreen} /> */}
         <MainStack.Screen name={AUTHENTICATE_ROUTE.INTRO} component={IntroScreen} />
         <MainStack.Screen name={AUTHENTICATE_ROUTE.LOGINAPP} component={LoginTrainingScreen} />
         <MainStack.Screen name={AUTHENTICATE_ROUTE.REGISTERAPP} component={RegisterTrainingScreen} />

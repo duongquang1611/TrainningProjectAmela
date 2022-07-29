@@ -47,7 +47,11 @@ const AccountTaskTrainning = () => {
     }, [timeStart]);
     const onAddDateTask = async (formData: any) => {
         const cutStartTime = formData.startTime;
+<<<<<<< HEAD
         const resultStartTime = cutStartTime.split(' ');
+=======
+        const resultStartTime = cutStartTime.split(' ', 3);
+>>>>>>> 5ce903e (taskDate)
         const resultEndTime = getValues('endTime').format(HHmm);
         try {
             await postAddDateTask({
@@ -97,6 +101,7 @@ const AccountTaskTrainning = () => {
                             customLabelStyle={styles.cssLabel}
                         />
                     </View>
+<<<<<<< HEAD
 
                     <StyledInputForm
                         name={'startTime'}
@@ -141,13 +146,67 @@ const AccountTaskTrainning = () => {
                             );
                         }}
                     />
+=======
+                    <>
+                        <StyledInputForm
+                            name={'startTime'}
+                            customLabelStyle={styles.cssLabel}
+                            renderBaseInput={({ field, fieldState }: IParamsRender) => {
+                                const { value, onChange } = field;
+                                const { error } = fieldState;
+                                return (
+                                    <StyledDateTimePicker
+                                        errorMessage={error?.message}
+                                        value={value}
+                                        onChangeText={onChange}
+                                        placeholder={HHmm}
+                                        label="Start-Time"
+                                        is24Hour={false}
+                                        formatShow={HHmm}
+                                        formatTemplate={YYYYMMDDHHmm}
+                                        mode={'time'}
+                                        customLabelStyle={styles.cssLabel}
+                                    />
+                                );
+                            }}
+                        />
+                    </>
+                    <>
+                        <StyledInputForm
+                            name={'endTime'}
+                            customLabelStyle={styles.cssLabel}
+                            renderBaseInput={({ field, fieldState }: IParamsRender) => {
+                                const { value, onChange } = field;
+                                const { error } = fieldState;
+                                return (
+                                    <StyledDateTimePicker
+                                        errorMessage={error?.message}
+                                        value={value}
+                                        placeholder={HHmm}
+                                        onChangeText={onChange}
+                                        label="End-Time"
+                                        is24Hour={true}
+                                        formatShow={HHmm}
+                                        formatTemplate={YYYYMMDDHHmm}
+                                        mode={'time'}
+                                        customLabelStyle={styles.cssLabel}
+                                    />
+                                );
+                            }}
+                        />
+                    </>
+>>>>>>> 5ce903e (taskDate)
                 </FormProvider>
 
                 <StyledTouchable
                     onPress={handleSubmit(onAddDateTask)}
                     customStyle={[styles.button, !isValid && { backgroundColor: 'gray' }]}
                     disabled={!isValid}>
+<<<<<<< HEAD
                     <StyledText originValue="Submit" customStyle={styles.textButton} />
+=======
+                    <StyledText i18nText={'Submit'} customStyle={styles.textButton} />
+>>>>>>> 5ce903e (taskDate)
                 </StyledTouchable>
             </KeyboardAwareScrollView>
         </>

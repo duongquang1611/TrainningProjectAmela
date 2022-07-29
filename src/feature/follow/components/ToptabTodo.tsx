@@ -295,6 +295,8 @@ const AllScreen = () => {
 };
 
 const Item = memo(({ item, onPress, onHandleEditTodo }: any) => {
+    console.log('item', item.member.avatar.name);
+
     return (
         <View style={styles.items}>
             <View style={styles.itemContainer}>

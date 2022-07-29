@@ -35,7 +35,11 @@ interface FormInputProps extends StyledInputProps {
     InputComponent?: FunctionComponent<any>;
     renderBaseInput?: ({ field, fieldState, formState }: IParamsRender) => React.ReactElement;
     dynamicOnChangeName?: string;
+<<<<<<< HEAD
     dateTimeProps?: PickerDateTimeProps;
+=======
+    dateTimeProps?: ReactNativeModalDateTimePickerProps | any;
+>>>>>>> 5ce903e (taskDate)
     pickerProps?: PickerProps;
     checkBoxProps?: ICheckBox;
 }
