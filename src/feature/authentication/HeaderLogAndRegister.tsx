@@ -3,9 +3,13 @@ import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
 import React, { memo } from 'react';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
+import Images from '../../assets/images';
+import { AUTHENTICATE_ROUTE } from '../../navigation/config/routes';
+import { navigate } from '../../navigation/NavigationService';
 
 const HeaderLogAndRegister = (props: any) => {
-    const { title, customStyle, img, customStyleIcon, onPressIconRight } = props;
+    const { title, customStyle, img, customStyleIcon, onPressIconRight, isBack = true, customStyleIconBack } = props;
+
     return (
         <View style={styles.container}>
             {Boolean(title) && <StyledText i18nText={title} customStyle={customStyle} />}
@@ -13,6 +17,17 @@ const HeaderLogAndRegister = (props: any) => {
                 <StyledTouchable onPress={onPressIconRight}>
                     <StyledIcon source={img} size={26} customStyle={customStyleIcon} />
                 </StyledTouchable>
+            )}
+            {isBack ? (
+                <StyledTouchable onPress={() => navigate(AUTHENTICATE_ROUTE.INTRO)} customStyle={styles.buttonBack}>
+                    <StyledIcon
+                        source={Images.icons.back}
+                        size={50}
+                        customStyle={[styles.cssIcon, customStyleIconBack]}
+                    />
+                </StyledTouchable>
+            ) : (
+                <View style={styles.buttonBack} />
             )}
         </View>
     );
@@ -26,6 +41,15 @@ const styles = ScaledSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',
+    },
+    buttonBack: {
+        width: '25@vs',
+        height: '25@vs',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    cssIcon: {
+        marginTop: '30@vs',
     },
 });
 

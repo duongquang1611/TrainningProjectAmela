@@ -26,13 +26,12 @@ const ImagePicker = (props: ImagePickerProp) => {
     const showActionSheet = () => {
         actionSheet?.current?.show();
     };
-
     const pickMainImage = async (index: number) => {
         try {
             setLoading(true);
             const uri = await ImageUploader.pickImage(index);
             setImage(uri || image);
-        } catch (err) {
+        } catch (err: any) {
             logger('err', err);
         } finally {
             setLoading(false);

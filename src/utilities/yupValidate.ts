@@ -20,7 +20,11 @@ const yupValidate = {
             .strict(true)
             .min(USERNAME_MIN_LENGTH, i18next.t('error.nameLength'))
             .max(USERNAME_MAX_LENGTH, i18next.t('error.nameLength')),
-
+    gender: () => yup.string().required(() => requireField('gender')),
+    address: () => yup.string().required(() => requireField('address')),
+    description: () => yup.string().required(() => requireField('description')),
+    currentDate: () => yup.string().required(() => requireField('currentDate')),
+    note: () => yup.string().required(() => requireField('note')),
     email: () =>
         yup
             .string()
@@ -58,12 +62,13 @@ const yupValidate = {
             .string()
             .required(() => requireField('password'))
             .trim(i18next.t('error.trimSpace'))
-            .strict(true)
-            .min(PASSWORD_MIN_LENGTH, i18next.t('error.passwordLength'))
-            .max(PASSWORD_MAX_LENGTH, i18next.t('error.passwordLength'))
+            .min(PASSWORD_MIN_LENGTH, i18next.t('error.passwordMinLength'))
+            .max(PASSWORD_MAX_LENGTH, i18next.t('error.passwordMaxLength'))
             .matches(REGEX_PASSWORD, i18next.t('error.validatePassword'));
     },
+
     birthday: () => yup.string().required(() => requireField('birthday')),
+
     labelPicker: () => yup.string().required(() => requireField('labelPicker')),
     policy: () => yup.string().required(() => requireField('policy')),
     newPassWord: (ref?: string, isMatchCurrentPassword = true): any => {

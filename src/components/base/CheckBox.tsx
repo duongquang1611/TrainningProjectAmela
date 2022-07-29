@@ -4,12 +4,11 @@ import { StyledIcon, StyledText, StyledTouchable } from 'components/base';
 import React, { useCallback } from 'react';
 import { ImageStyle, StyleProp, TextStyle, View, ViewStyle } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
-import { I18Type } from './StyledText';
 
 export interface ICheckBox {
     value?: string;
     onConfirm?: (value: string) => void;
-    content: I18Type;
+    content?: string;
     customStyle?: StyleProp<ViewStyle>;
     customContentStyle?: StyleProp<TextStyle>;
     customIconStyle?: StyleProp<ImageStyle>;
@@ -31,7 +30,7 @@ const CheckBox = (props: ICheckBox) => {
                     customStyle={[styles.icCheck, customIconStyle]}
                 />
             </StyledTouchable>
-            <StyledText i18nText={content} customStyle={[styles.content, customContentStyle]} />
+            <StyledText originValue={content} customStyle={[styles.content, customContentStyle]} />
         </View>
     );
 };

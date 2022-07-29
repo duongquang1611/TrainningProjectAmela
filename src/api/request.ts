@@ -8,12 +8,12 @@ import { apiLogger } from 'utilities/logger';
 import { ERRORS } from 'utilities/staticData';
 import i18next from 'utilities/i18next';
 
-const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}v1/app/auth/request-access-token`;
+const AUTH_URL_REFRESH_TOKEN = `${Config.API_URL}client-auth/request-access-token`;
 let hasAnyNetworkDialogShown = false;
 
 // cấu hình axios
 const request = axios.create({
-    baseURL: 'https://training-api.test.amela.vn' || Config.API_URL,
+    baseURL: 'https://training.test1.amelacorp.com' || Config.API_URL,
     timeout: 8000,
     headers: { Accept: '*/*' },
 });
@@ -110,7 +110,7 @@ request.interceptors.response.use(
                     });
                     originalRequest.headers.Authorization = `Bearer ${queuePromise.token}`;
                     return request(originalRequest);
-                } catch (err) {
+                } catch (err: any) {
                     return rejectError(err, validNetwork);
                 }
             }

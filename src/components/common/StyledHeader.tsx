@@ -51,7 +51,7 @@ const StyledHeader = (props: HeaderProps) => {
                 ) : (
                     <View style={styles.buttonBack} />
                 )}
-                <StyledText i18nText={title || ' '} customStyle={styles.title} numberOfLines={1} />
+                <StyledText originValue={title || ' '} customStyle={styles.title} numberOfLines={1} />
                 {iconAction ? (
                     <StyledTouchable onPress={onPressAction} customStyle={styles.buttonAction}>
                         <StyledIcon source={iconAction} size={30} customStyle={styles.iconAction} />

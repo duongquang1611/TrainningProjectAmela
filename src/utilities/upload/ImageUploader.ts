@@ -18,8 +18,9 @@ const ImageUploaded = {
                 localPath = await ImageUploaded.chooseImageFromCamera();
             }
             const uri = await ImageUploaded.uploader(localPath);
+
             return uri;
-        } catch (err) {
+        } catch (err: any) {
             logger(err);
             return null;
         }
@@ -60,8 +61,9 @@ const ImageUploaded = {
         const formData = new FormData();
         formData.append('files', formatImage);
         const uri = await uploadImage(formData);
-        if (uri?.length > 0) {
-            return uri[0];
+
+        if (uri?.data?.data?.length > 0) {
+            return uri?.data?.data[0];
         }
         return null;
     },

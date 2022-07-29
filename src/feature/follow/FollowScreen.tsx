@@ -1,6 +1,4 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useState } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import { Themes } from 'assets/themes';
@@ -8,7 +6,7 @@ import HeaderLogAndRegister from 'feature/authentication/HeaderLogAndRegister';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { TOP_TAB } from 'navigation/config/routes';
 import ModalizeManager from 'components/base/modal/ModalizeManager';
-import ModalContent from 'feature/home/components/ModalContent';
+import ModalContent from 'feature/home/components/ModalAddTaskDate';
 import AllScreen from './components/ToptabTodo';
 import NoreadScreen from './components/ToptabCallApi';
 import SeenScreen from './components/ToptabTest';
@@ -17,7 +15,6 @@ const Tab = createMaterialTopTabNavigator();
 
 const FollowScreem = () => {
     const modalize = ModalizeManager();
-    const [currentValue, setCurrentValue] = useState(0);
     const showModalAdd = () => {
         modalize.show(
             'modalAdd',

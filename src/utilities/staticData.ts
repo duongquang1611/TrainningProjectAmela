@@ -22,7 +22,16 @@ export const dataPicker = [
     'label9',
     'label10',
 ];
-
+export const dataGenderPicker = [
+    {
+        id: 1,
+        name: 'Nam',
+    },
+    {
+        id: 0,
+        name: 'Nữ',
+    },
+];
 export const DATA = [
     {
         id: 1,

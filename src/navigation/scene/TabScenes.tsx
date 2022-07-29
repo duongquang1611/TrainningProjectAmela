@@ -15,7 +15,7 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import AccountScreen from '../../feature/account/AccountScreen';
+import AccountTaskTrainning from '../../feature/account/AccountTask';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -38,7 +38,7 @@ const AccountView = () => (
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountScreen} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountTaskTrainning} />
     </MainStack.Navigator>
 );
 const MainTabContainer = () => {

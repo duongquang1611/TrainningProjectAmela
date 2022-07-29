@@ -24,6 +24,9 @@ export interface IParamsRender {
     fieldState: ControllerFieldState;
     formState: UseFormStateReturn<FieldValues>;
 }
+
+type PickerDateTimeProps = Omit<ReactNativeModalDateTimePickerProps, 'onConfirm' | 'onCancel'>;
+
 interface FormInputProps extends StyledInputProps {
     name: string;
     rules?: RegisterOptions;
@@ -32,7 +35,7 @@ interface FormInputProps extends StyledInputProps {
     InputComponent?: FunctionComponent<any>;
     renderBaseInput?: ({ field, fieldState, formState }: IParamsRender) => React.ReactElement;
     dynamicOnChangeName?: string;
-    dateTimeProps?: ReactNativeModalDateTimePickerProps;
+    dateTimeProps?: PickerDateTimeProps;
     pickerProps?: PickerProps;
     checkBoxProps?: ICheckBox;
 }

@@ -4,7 +4,7 @@ import { SafeAreaView, View } from 'react-native';
 import { StyledButton, StyledInput, StyledList, StyledText } from 'components/base';
 import { getSearchUser } from 'api/modules/api-app/general';
 import { debounce } from 'lodash';
-import usePaging from 'hooks/usePaging';
+import usePaging from '../../hooks/usePaging';
 
 // const getUser = (pageIndex: number, pageSize: number, keyword: string): Promise<any> => {
 //     return request.get(`/v1/app/task/search-users?&pageIndex=${pageIndex}&pageSize=${pageSize}&keyword=${keyword}`);

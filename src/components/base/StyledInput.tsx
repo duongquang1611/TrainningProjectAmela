@@ -22,16 +22,13 @@ export interface StyledInputProps extends TextInputProps {
     wrapInputStyle?: StyleProp<ViewStyle>;
     customLabelStyle?: StyleProp<TextStyle>;
     customErrorStyle?: StyleProp<TextStyle>;
-    customPlaceHolder?: string;
-    customPlaceHolder?: I18Type;
+    customPlaceHolder?: any;
     placeholderTextColor?: ColorValue;
     customUnderlineColor?: ColorValue;
     customReturnKeyType?: ReturnKeyTypeOptions;
     ref?: any;
     errorMessage?: string;
     label?: string;
-    textContentType?: textContentType;
-    autoCompleteType?: autoCompleteType;
     textContentType?: TextContentType;
     autoCompleteType?: AutoCompleteType;
     renderRight?: any;
@@ -121,8 +118,6 @@ const styles = ScaledSheet.create({
     },
     container: {
         marginVertical: 8,
-        // width: Metrics.screenWidth * 0.8,
-        backgroundColor: 'blue',
         marginTop: '15@s',
     },
     label: {},

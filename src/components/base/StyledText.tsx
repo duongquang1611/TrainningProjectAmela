@@ -15,13 +15,15 @@ interface StyledTextProps extends TextProps {
 }
 
 interface StyledTextWithOriginValue extends StyledTextProps {
-    originValue?: never;
-    i18nText?: I18Type;
+    originValue: string;
+
+    i18nText?: never;
 }
 
 interface StyledTextWithI18nValue extends StyledTextProps {
     originValue?: never;
-    i18nText: Normalize<Resource>;
+
+    i18nText: I18Type;
 }
 
 type StyledTextCombineProps = StyledTextWithOriginValue | StyledTextWithI18nValue;

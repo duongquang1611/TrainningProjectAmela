@@ -1,6 +1,6 @@
 import React, { RefObject } from 'react';
 import { CommonActions, StackActions } from '@react-navigation/native';
-import { APP_ROUTE } from './config/routes';
+import { APP_ROUTE, AUTHENTICATE_ROUTE } from './config/routes';
 
 export const navigationRef: RefObject<any> = React.createRef();
 
@@ -12,7 +12,7 @@ export function navigate(name: string, params = {}): void {
 export function goBack(): void {
     navigationRef.current.goBack();
 }
-
+export const backIntro = AUTHENTICATE_ROUTE.INTRO;
 export function navigateReplace(name: string, params = {}): void {
     // console.log(`${`navigate replace  ${name}`}`, params);
     navigationRef.current.dispatch(StackActions.replace(name, params));
