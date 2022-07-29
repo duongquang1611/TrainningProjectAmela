@@ -11,6 +11,7 @@ export const getListTask = (params: any) => request.get(`v1/app/task/list`, para
 export const postAddTask = (params: any) => request.post(`v1/app/task/add`, params);
 export const postSigup = (params: any) => request.post(`/v1/app/auth/signup`, params);
 export const putProfile = (params: any) => request.put(`v1/app/profile`, params);
+export const putPass = (params: any) => request.put(`v1/app/auth/change-password`, params);
 export const getSearchUser = (params: any) => request.get(`/v1/app/task/search-users`, params);
 // export const getProfileUser = () => request.get(`v1/app/profile`);
 export const putUpdateTask = (taskId: number | string, params: any) =>

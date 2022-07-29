@@ -76,8 +76,10 @@ export default {
             sendButtonTitle: '次へ',
         },
     },
+    account: {
+        policy: 'I accepted policy.',
+    },
     home: {},
-    account: {},
     notification: {},
     setting: {},
 

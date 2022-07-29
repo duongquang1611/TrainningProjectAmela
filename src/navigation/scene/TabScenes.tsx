@@ -15,6 +15,7 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import AccountScreen from '../../feature/account/AccountScreen';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -37,8 +38,7 @@ const AccountView = () => (
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        {/* <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT} component={AccountHome} /> */}
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountHome} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountScreen} />
     </MainStack.Navigator>
 );
 const MainTabContainer = () => {
@@ -78,10 +78,10 @@ const MainTabContainer = () => {
     return (
         <MainTab.Navigator
             screenOptions={{ headerShown: false }}
-            // initialRouteName={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW}
+            initialRouteName={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT}
             tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
-            {ArrayTabs.map((item, index) => (
-                <MainTab.Screen key={`${index}`} options={{ ...item }} {...item} />
+            {ArrayTabs.map(item => (
+                <MainTab.Screen key={item.name} options={{ ...item }} {...item} />
             ))}
         </MainTab.Navigator>
     );

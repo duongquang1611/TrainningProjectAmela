@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import navigationConfigs from 'navigation/config/options';
 import { AUTHENTICATE_ROUTE } from 'navigation/config/routes';
 import LoginScreen from 'feature/authentication/LoginScreen';
-// import RegisterScreen from 'feature/authentication/RegisterScreen';
 import ForgotPasswordScreen from 'feature/authentication/ForgotPwdScreen';
 import SendOTP from 'feature/authentication/SendOtp';
 import ChangePassword from 'feature/authentication/ChangePassword';
