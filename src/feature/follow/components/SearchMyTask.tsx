@@ -168,7 +168,6 @@ const ItemSearch = ({ item }: any) => {
         </View>
     );
 };
-
 const styles = ScaledSheet.create({
     container: {
         flex: 1,

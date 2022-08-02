@@ -264,6 +264,11 @@ const AllScreen = () => {
                         </View>
                     </View>
                 </Modal> */}
+                <View style={styles.cssModalIcon}>
+                    <StyledTouchable onPress={showModalAdd}>
+                        <StyledIcon source={Images.icons.plus} size={30} />
+                    </StyledTouchable>
+                </View>
 
                 <StyledTouchable onPress={showModalAdd}>
                     <StyledIcon source={Images.icons.plus} size={30} />
