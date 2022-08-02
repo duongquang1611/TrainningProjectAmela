@@ -46,7 +46,7 @@ const StyledHeader = (props: HeaderProps) => {
             <View style={styles.viewHeader}>
                 {isBack ? (
                     <StyledTouchable onPress={onBack} customStyle={styles.buttonBack}>
-                        <StyledIcon source={Images.icons.back} size={30} />
+                        <StyledIcon source={Images.icons.back} size={30} customStyle={styles.iconBack} />
                     </StyledTouchable>
                 ) : (
                     <View style={styles.buttonBack} />
@@ -54,7 +54,7 @@ const StyledHeader = (props: HeaderProps) => {
                 <StyledText originValue={title || ' '} customStyle={styles.title} numberOfLines={1} />
                 {iconAction ? (
                     <StyledTouchable onPress={onPressAction} customStyle={styles.buttonAction}>
-                        <StyledIcon source={iconAction} size={30} customStyle={styles.iconAction} />
+                        <StyledIcon source={iconAction} size={30} />
                     </StyledTouchable>
                 ) : (
                     <View style={styles.buttonAction} />
@@ -66,7 +66,6 @@ const StyledHeader = (props: HeaderProps) => {
 
 const styles = ScaledSheet.create({
     container: {
-        // height: '60@vs',
         backgroundColor: Themes.COLORS.white,
         justifyContent: 'flex-end',
         paddingTop: Metrics.safeTopPadding,
@@ -88,7 +87,6 @@ const styles = ScaledSheet.create({
     title: {
         fontSize: '20@ms',
         fontWeight: 'bold',
-        maxWidth: '80%',
         color: Themes.COLORS.black,
     },
     buttonAction: {
@@ -97,7 +95,6 @@ const styles = ScaledSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    iconAction: {},
     shadow: {
         shadowColor: Themes.COLORS.black,
         shadowOffset: {
@@ -107,6 +104,9 @@ const styles = ScaledSheet.create({
         shadowOpacity: 0.17,
         shadowRadius: 5.49,
         elevation: 5,
+    },
+    iconBack: {
+        tintColor: Themes.COLORS.black,
     },
 });
 

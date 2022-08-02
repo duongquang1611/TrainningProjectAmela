@@ -26,6 +26,13 @@ interface ModalContentProps {
 
 const ModalUpdateDateTask = (props: ModalContentProps) => {
     const { todo, onRefresh } = props;
+    const DEFAULT_FORM = {
+        name: 'test001',
+        description: 'test@test.com',
+        startDate: todo.startDate,
+        startTime: dayjs(`${todo.startDate} ${todo.startTime}`).format(YYYYMMDDHHmm),
+        endTime: dayjs(`${todo.startDate} ${todo.endTime}`).format(YYYYMMDDHHmm),
+    };
     const schema = yup.object().shape({
         name: yupValidate.name(),
         description: yupValidate.description(),
@@ -34,6 +41,7 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
         endTime: yupValidate.currentDate(),
     });
     const form = useForm({
+        defaultValues: DEFAULT_FORM,
         mode: 'onChange',
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
@@ -44,23 +52,22 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
         handleSubmit,
         setValue,
         watch,
-        getValues,
     } = form;
     const timeStart = watch('startTime');
+
     useEffect(() => {
-        const updateEndTime = dayjs(timeStart).add(60, 'minute');
+        const updateEndTime = dayjs(timeStart).add(60, 'minute').format(YYYYMMDDHHmm);
         setValue('endTime', updateEndTime, { shouldValidate: true });
     }, [timeStart]);
-
     const handleEditTaskDate = async (formData: any) => {
-        const cutStartTime = formData.startTime;
-        const resultStartTime = cutStartTime.split(' ');
-        const resultEndTime = getValues('endTime').format(HHmm);
+        const timePlay = dayjs(formData.startTime).format(HHmm);
+        const timeEnd = dayjs(formData.endTime).format(HHmm);
+
         try {
             await putUpdateTaskDate(todo.id, {
                 ...formData,
-                startTime: resultStartTime[1],
-                endTime: `${resultEndTime}`,
+                startTime: timePlay,
+                endTime: timeEnd,
             });
             onRefresh();
             props?.closeModal?.();
@@ -71,7 +78,6 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
     const handleCloseModal = () => {
         props?.closeModal?.();
     };
-
     return (
         <View style={styles.contModalContent}>
             <KeyboardAwareScrollView
@@ -85,7 +91,6 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
                         label="Name"
                         returnKeyType="next"
                         customLabelStyle={styles.cssLabel}
-                        customPlaceHolder={todo.name}
                         customStyle={styles.cssInputName}
                     />
                     <StyledInputForm
@@ -99,14 +104,12 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
                         // onChangeText={(text: string) => {
                         //     setValue('description', text, { shouldValidate: true });
                         // }}
-                        customPlaceHolder={'description...'}
                     />
                     <View style={styles.cssAge}>
                         <StyledInputForm
                             name={'startDate'}
                             label="Start-Date"
                             InputComponent={StyledDateTimePicker}
-                            customPlaceHolder={todo.startDate}
                             dateTimeProps={{
                                 mode: 'date',
                                 minimumDate: new Date(tomorrow),
@@ -126,7 +129,6 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
                                         errorMessage={error?.message}
                                         value={value}
                                         onChangeText={onChange}
-                                        placeholder={todo.startTime}
                                         label="Start-Time"
                                         formatShow={HHmm}
                                         formatTemplate={YYYYMMDDHHmm}
@@ -148,7 +150,6 @@ const ModalUpdateDateTask = (props: ModalContentProps) => {
                                     <StyledDateTimePicker
                                         errorMessage={error?.message}
                                         value={value}
-                                        placeholder={todo.endTime}
                                         onChangeText={onChange}
                                         label="End-Time"
                                         formatShow={HHmm}

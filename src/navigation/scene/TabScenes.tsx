@@ -16,6 +16,7 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AccountTaskTrainning from '../../feature/account/AccountTask';
+import SearchMyTask from '../../feature/follow/components/SearchMyTask';
 
 const MainStack = createStackNavigator();
 const MainTab = createBottomTabNavigator();
@@ -41,6 +42,13 @@ const SettingStack = () => (
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountTaskTrainning} />
     </MainStack.Navigator>
 );
+const FollowStack = () => (
+    <MainStack.Navigator screenOptions={navigationConfigs}>
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW} component={FollowScreem} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.SEARCH} component={SearchMyTask} />
+    </MainStack.Navigator>
+);
+
 const MainTabContainer = () => {
     const { t } = useTranslation();
     const ArrayTabs = [
@@ -71,7 +79,7 @@ const MainTabContainer = () => {
         {
             name: TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.FOLLOW,
             title: t('tab.tabFollow'),
-            component: FollowScreem,
+            component: FollowStack,
             icon: Images.icons.tab.follow,
         },
     ];

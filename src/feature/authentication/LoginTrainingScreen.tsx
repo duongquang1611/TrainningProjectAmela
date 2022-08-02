@@ -7,7 +7,7 @@ import { View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ScaledSheet } from 'react-native-size-matters';
 import { useLogin } from 'utilities/authenticate/AuthenticateService';
-import HeaderLogAndRegister from './HeaderLogAndRegister';
+import StyledHeader from '../../components/common/StyledHeader';
 
 const LoginTrainingScreen = () => {
     const { requestLogin, loading } = useLogin();
@@ -31,8 +31,7 @@ const LoginTrainingScreen = () => {
     // const pass= arrAccount.forEach((item: any) => console.log(item.password));
     return (
         <View style={styles.container}>
-            <HeaderLogAndRegister isBack={true} />
-
+            <StyledHeader title="Login" />
             <View style={styles.main}>
                 <StyledText i18nText={'login.titleRegister'} customStyle={styles.titleRegister} />
                 <View style={styles.cssInput}>

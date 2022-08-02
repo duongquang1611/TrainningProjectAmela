@@ -6,12 +6,12 @@ import { StyledIcon, StyledImage, StyledList, StyledText, StyledTouchable } from
 import { Themes } from 'assets/themes';
 import ModalizeManager from 'components/base/modal/ModalizeManager';
 import ModalContent from 'feature/home/components/ModalAddTaskDate';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { RootState } from 'app-redux/hooks';
 import { deleteTask, getListTask } from 'api/modules/api-app/general';
 import usePaging from '../../../hooks/usePaging';
 import ModalContent2 from '../../home/components/ModalUpdateTaskDate';
 import { autoRenderTaskDate } from '../../../utilities/helper';
+import { TAB_NAVIGATION_ROOT } from '../../../navigation/config/routes';
+import { navigate } from '../../../navigation/NavigationService';
 
 // let onEndReachedCalledDuringMomentum = true;
 
@@ -72,7 +72,6 @@ const AllScreen = () => {
     //     }
     // };
     const { onLoadMore, onRefresh, pagingData } = usePaging(getListTask);
-    console.log('pagingData', pagingData);
 
     // useEffect(() => {
     //     setIsloading(true);
@@ -245,7 +244,7 @@ const AllScreen = () => {
     // };
     return (
         <View style={styles.containerAll}>
-            <View>
+            <View style={styles.cssTaskbar}>
                 {/* <Modal animationOut="swing" isVisible={modalVisible}>
                     <View>
                         <View style={styles.modalView}>
@@ -267,7 +266,11 @@ const AllScreen = () => {
                 </Modal> */}
 
                 <StyledTouchable onPress={showModalAdd}>
-                    <StyledIcon source={Images.icons.plus} size={30} customStyle={styles.cssAdd} />
+                    <StyledIcon source={Images.icons.plus} size={30} />
+                </StyledTouchable>
+
+                <StyledTouchable onPress={() => navigate(TAB_NAVIGATION_ROOT.FOLLOW_ROUTE.SEARCH)}>
+                    <StyledIcon source={Images.icons.search} size={30} />
                 </StyledTouchable>
             </View>
             <StyledList
@@ -295,8 +298,6 @@ const AllScreen = () => {
 };
 
 const Item = memo(({ item, onPress, onHandleEditTodo }: any) => {
-    console.log('item', item.member.avatar.name);
-
     return (
         <View style={styles.items}>
             <View style={styles.itemContainer}>
@@ -410,10 +411,7 @@ const styles = ScaledSheet.create({
     cssAddItem: {
         color: Themes.COLORS.white,
     },
-    cssAdd: {
-        marginTop: '20@s',
-        marginHorizontal: '170@s',
-    },
+
     titInput: {
         color: Themes.COLORS.white,
         fontWeight: 'bold',
@@ -428,8 +426,13 @@ const styles = ScaledSheet.create({
         width: '100%',
         borderRadius: '50@s',
         height: '100%',
-
-        // marginTop: '-3@s',
+    },
+    cssTaskbar: {
+        width: '100%',
+        height: '50@vs',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
     },
 });
 export default AllScreen;

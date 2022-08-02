@@ -32,6 +32,7 @@ export const dataGenderPicker = [
         name: 'Nữ',
     },
 ];
+export const linkIMG = `https://aos-app-order-soba-8e35e74.s3.amazonaws.com/`;
 export const DATA = [
     {
         id: 1,

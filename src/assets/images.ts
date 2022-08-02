@@ -6,6 +6,7 @@ const Images = {
         plus: require('./icon/ic_plus.png'),
         back: require('./icon/ic_back.png'),
         rash: require('./icon/ic_rash.png'),
+        search: require('./icon/ic_search.png'),
         tab: {
             home: require('./icon/ic_home.png'),
             notification: require('./icon/ic_notification.png'),

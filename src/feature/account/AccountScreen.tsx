@@ -82,10 +82,6 @@ const AccountScreen = () => {
     const handleConfirmDate = (date: any) => {
         setCurrentValue(date);
     };
-<<<<<<< HEAD
-=======
-    console.log('value', currentValue);
->>>>>>> 5ce903e (taskDate)
 
     return (
         <>

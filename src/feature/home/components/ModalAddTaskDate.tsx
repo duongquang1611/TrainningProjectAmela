@@ -61,7 +61,6 @@ const ModalAddDate = (props: ModalContentProps) => {
     });
     const form = useForm({
         mode: 'onChange',
-        // defaultValues: DEFAULT_FORM,
         resolver: yupResolver(schema),
         reValidateMode: 'onChange',
         criteriaMode: 'firstError', // first error from each field will be gathered.
@@ -71,7 +70,6 @@ const ModalAddDate = (props: ModalContentProps) => {
         handleSubmit,
         setValue,
         watch,
-        getValues,
     } = form;
     const timeStart = watch('startTime');
     useEffect(() => {
@@ -91,14 +89,12 @@ const ModalAddDate = (props: ModalContentProps) => {
     //     }
     // };
     const onAddDateTask = async (formData: any) => {
-        const cutStartTime = formData.startTime;
-        const resultStartTime = cutStartTime.split(' ', 3);
-        const resultEndTime = getValues('endTime').format(HHmm);
-
+        const timePlay = dayjs(formData?.startTime)?.format(HHmm);
+        const resultEndTime = dayjs(formData?.endTime)?.format(HHmm);
         try {
             await postAddDateTask({
                 ...formData,
-                startTime: resultStartTime[1],
+                startTime: timePlay,
                 endTime: resultEndTime,
             });
             onRefresh();

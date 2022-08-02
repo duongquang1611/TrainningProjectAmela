@@ -20,6 +20,7 @@ const AccountViewUser = () => {
     // const lastIndex = imgProfile.lastIndexOf('/');
     // const checkImgProfile = imgProfile.slice(lastIndex + 1);
     const checkImgProfile = imgProfile.split('/', 4);
+    console.log(checkImgProfile);
 
     // const getIndex = imgProfile.indexOf('.com/' || '.vn');
     // const resultImg = imgProfile.slice(0, getIndex + 5 || getIndex + 3);
@@ -97,7 +98,6 @@ const AccountViewUser = () => {
         return finalError;
     }, [nameUser, youPhone, youEmail]);
     const disabled = Object.values(errorForm).find((item: any) => item.length > 0);
-    console.log('name', nameUser);
 
     return (
         <View style={styles.container}>
