@@ -17,8 +17,8 @@ const safeBottomPadding =
         ? 20
         : StaticSafeAreaInsets.safeAreaInsetsBottom;
 const Metrics = {
-    navBarHeight: Platform.OS === 'ios' ? 54 : 66,
-    screenHeight: width < height ? height : width,
+    navBarHeight: Platform.OS === 'ios' ? 50 : 60,
+    screenHeight: width > height ? width : height,
     screenWidth: width < height ? width : height,
     safeBottomPadding,
     safeTopPadding,

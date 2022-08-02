@@ -4,7 +4,12 @@ import i18next from 'i18next';
 
 dayjs.locale('ja');
 export const YYYYMMDD_JP = 'YYYY年MM月DD日';
-export const YYYYMMDD = 'YYYY/MM/DD';
+export const YYYYMMDD = 'YYYY-MM-DD';
+export const YYYYMMDDT = 'YYYY, MM, DD';
+export const YYYYMMDDHHmm = 'YYYY/MM/DD HH:mm';
+export const YYYYMMDDHHmmss = 'YYYY/MM/DD HH:mm:ss';
+export const HHmm = 'HH:mm';
+export const hhmm = 'hh:mm';
 export const DDMM = 'DD/MM';
 
 export const changeLocale = (locale: string): void => {

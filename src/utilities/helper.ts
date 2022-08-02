@@ -7,6 +7,10 @@ import Picker from 'react-native-picker';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import codePush from 'react-native-code-push';
 import Config from 'react-native-config';
+import dayjs from 'dayjs';
+import { HHmm, YYYYMMDD, YYYYMMDDT } from './format';
+
+const plusDate = dayjs();
 
 export const isAndroid = Platform.OS === 'android';
 
@@ -74,3 +78,27 @@ export const getCodePushInfo = () => {
         });
     }
 };
+
+export const autoRenderTaskDate = () => {
+    const arrAddDateTask = <any>[];
+    for (let i = 0; i <= 100; i += 1) {
+        const resultDate = plusDate.add(i + 1, 'day').format(YYYYMMDD);
+        const resultStartTime = plusDate.add(i, 'minute');
+        const resultEndTime = resultStartTime.add(15, 'minute').format(HHmm);
+        const formatStartTime = resultStartTime.format(HHmm);
+
+        arrAddDateTask.push({
+            name: `long${i}`,
+            description: '123456',
+            note: '56789',
+            startDate: `${resultDate}`,
+            startTime: `${formatStartTime}`,
+            endTime: `${resultEndTime}`,
+        });
+    }
+    return arrAddDateTask;
+};
+
+export const tomorrow = dayjs().add(1, 'day').format(YYYYMMDDT);
+export const today = dayjs();
+export const timeToday = new Date();

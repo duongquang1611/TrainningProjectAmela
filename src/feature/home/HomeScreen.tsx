@@ -10,7 +10,7 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import { LogBox, StyleSheet, View } from 'react-native';
 import { wait } from 'utilities/helper';
 import { dataPicker } from 'utilities/staticData';
-import ModalContent from './components/ModalContent';
+import ModalContent from './components/ModalAddTaskDate';
 
 LogBox.ignoreLogs(['ViewPropTypes will be removed', 'ColorPropType will be removed']);
 

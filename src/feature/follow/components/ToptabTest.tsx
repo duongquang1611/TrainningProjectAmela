@@ -14,7 +14,7 @@ const addZero = (innitValue: number) => {
     }
     return innitValue;
 };
-
+let timeReal = 3600;
 const SeenScreen = () => {
     const [results, setResults] = useState<any>([]);
     const [randomQuestions, setRandomQuestions] = useState<any>([]);
@@ -65,7 +65,7 @@ const SeenScreen = () => {
                 const hours = Math.floor(timeReal / 3600);
                 const minutes = Math.floor((timeReal % 3600) / 60);
                 const seconds = timeReal % 60;
-                // timeReal--;
+                timeReal -= 1;
 
                 const hh = addZero(hours);
                 const mm = addZero(minutes);
@@ -94,7 +94,6 @@ const SeenScreen = () => {
         // // dispatch(updateCount(1));
         // dispatch(updateGlobalData({ count1: 100 }));
     };
-
     return (
         <View style={styles.containerMultipleChoice}>
             <View style={styles.vocabulary}>

@@ -7,7 +7,7 @@ import StyledDateTimePicker from 'components/base/picker/StyledDateTimePicker';
 import StyledPicker from 'components/base/picker/StyledPicker';
 import StyledInputForm, { IParamsRender } from 'components/base/StyledInputForm';
 import StyledHeader from 'components/common/StyledHeader';
-import React from 'react';
+import React, { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -22,7 +22,7 @@ const DEFAULT_FORM = {
     phone: '0123456789',
     password: '12345678',
     confirmPassword: '12345678',
-    birthday: '1997/11/16',
+    birthday: '',
     labelPicker: dataPicker[4],
     policy1: '1',
     policy2: '',
@@ -58,7 +58,6 @@ const AccountScreen = () => {
     } = form;
 
     const onSubmit = (formData: any) => {
-        console.log(formData);
         AlertMessage(JSON.stringify(formData), 'Form Data');
     };
 
@@ -78,6 +77,11 @@ const AccountScreen = () => {
             />
         );
     };
+    const [valuePicker, setValuePicker] = useState(dataPicker[0]);
+    const [currentValue, setCurrentValue] = useState();
+    const handleConfirmDate = (date: any) => {
+        setCurrentValue(date);
+    };
 
     return (
         <>
@@ -95,6 +99,8 @@ const AccountScreen = () => {
                     <StyledInputForm secureTextEntry={true} name={'password'} label="Password" />
                     <StyledInputForm name={'confirmPassword'} label="Confirm Password" secureTextEntry={true} />
                     <StyledInputForm name={'birthday'} label="Date Of Birth" InputComponent={StyledDateTimePicker} />
+                    <StyledDateTimePicker value={currentValue} onChangeText={handleConfirmDate} />
+                    <StyledPicker label="Test Picker" dataList={dataPicker} onConfirm={handleConfirmDate} />
                     <StyledInputForm
                         name={'labelPicker'}
                         label="StyledPicker"
@@ -116,7 +122,7 @@ const AccountScreen = () => {
                     <StyledInputForm name={'policy2'} renderBaseInput={renderCheckBoxPolicyForm} />
                 </FormProvider>
                 <View style={styles.wrapButton}>
-                    <StyledButton onPress={reset} title={'Reset Form'} />
+                    <StyledButton onPress={() => reset()} title={'Reset Form'} />
                     <StyledButton
                         onPress={handleSubmit(onSubmit)}
                         title={'Submit'}

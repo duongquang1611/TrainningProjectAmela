@@ -31,7 +31,8 @@ const LoginTrainingScreen = () => {
     // const pass= arrAccount.forEach((item: any) => console.log(item.password));
     return (
         <View style={styles.container}>
-            <HeaderLogAndRegister />
+            <HeaderLogAndRegister isBack={true} />
+
             <View style={styles.main}>
                 <StyledText i18nText={'login.titleRegister'} customStyle={styles.titleRegister} />
                 <View style={styles.cssInput}>
@@ -53,7 +54,7 @@ const LoginTrainingScreen = () => {
                         customStyle={styles.sub}
                         onPress={() => {
                             requestLogin({
-                                username: login,
+                                email: login,
                                 password: passwordLog,
                             });
                         }}

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Themes } from 'assets/themes';
 import { ScaledSheet } from 'react-native-size-matters';
 import { View } from 'react-native';
-import { StyledButton, StyledInput, StyledText } from 'components/base';
+import { StyledButton, StyledImage, StyledInput, StyledText } from 'components/base';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'app-redux/hooks';
 import { putProfile } from 'api/modules/api-app/general';
@@ -15,7 +15,16 @@ const AccountViewUser = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
     const { user } = useSelector((state: RootState) => state.userInfo);
-    console.log(user);
+
+    const imgProfile = user?.images[0].name;
+    // const lastIndex = imgProfile.lastIndexOf('/');
+    // const checkImgProfile = imgProfile.slice(lastIndex + 1);
+    const checkImgProfile = imgProfile.split('/', 4);
+
+    // const getIndex = imgProfile.indexOf('.com/' || '.vn');
+    // const resultImg = imgProfile.slice(0, getIndex + 5 || getIndex + 3);
+    // const checkImgProfile = imgProfile.replace(resultImg, 'https://aos-app-order-soba-8e35e74.s3.amazonaws.com/');
+
     const [nameUser, setNameUser] = useState('');
     const [youPhone, setYouPhone] = useState('');
     const [youEmail, setYouEmail] = useState('');
@@ -100,12 +109,22 @@ const AccountViewUser = () => {
                 />
                 <StyledText originValue="Get Profile" customStyle={styles.cssTitleHeader} />
             </View>
+            <View style={styles.cssAvatar}>
+                <StyledImage
+                    source={{
+                        uri: `https://aos-app-order-soba-8e35e74.s3.amazonaws.com/${
+                            checkImgProfile[checkImgProfile.length - 1]
+                        }`,
+                    }}
+                    customStyle={styles.cssImg}
+                />
+            </View>
             <View style={styles.boxGetProfile}>
                 <View style={styles.cssBoxUserName}>
-                    <StyledText originValue={`UserName : ${user?.fullName}`} customStyle={styles.txtProfile} />
+                    <StyledText originValue={`UserName : ${user?.name}`} customStyle={styles.txtProfile} />
                 </View>
                 <View style={styles.cssBoxUserName}>
-                    <StyledText originValue={`Phone : ${user?.phone}`} customStyle={styles.txtProfile} />
+                    <StyledText originValue={`Birthday : ${user?.birthday}`} customStyle={styles.txtProfile} />
                 </View>
                 <View style={styles.cssBoxUserName}>
                     <StyledText originValue={`Email : ${user?.email}`} customStyle={styles.txtProfile} />
@@ -201,7 +220,6 @@ const styles = ScaledSheet.create({
     },
     cssTitle: {
         fontSize: '20@s',
-        marginTop: '50@vs',
         textAlign: 'center',
         fontWeight: 'bold',
         color: Themes.COLORS.darkOrange,
@@ -235,7 +253,7 @@ const styles = ScaledSheet.create({
         width: '100@ms',
         height: '50@vs',
         borderRadius: 20,
-        marginVertical: '10@vs',
+        marginVertical: '5@vs',
     },
     cssInput: {
         width: '100%',
@@ -259,6 +277,17 @@ const styles = ScaledSheet.create({
         marginLeft: '55@s',
         fontWeight: 'bold',
         color: Themes.COLORS.darkOrange,
+    },
+    cssAvatar: {
+        width: '100@s',
+        height: '100@s',
+        backgroundColor: 'blue',
+        borderRadius: '50@s',
+    },
+    cssImg: {
+        width: '100%',
+        borderRadius: '50@s',
+        height: '100%',
     },
 });
 

@@ -1,18 +1,34 @@
 import Images from 'assets/images';
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { formatDate, YYYYMMDD } from 'utilities/format';
+import DateTimePickerModal, { ReactNativeModalDateTimePickerProps } from 'react-native-modal-datetime-picker';
+import { formatDate } from 'utilities/format';
 import StyledIcon from '../StyledIcon';
-import StyledInput from '../StyledInput';
+import StyledInput, { StyledInputProps } from '../StyledInput';
 
-const StyledDateTimePicker = (props: any) => {
+type StyledDateTimePickerProps = {
+    value?: string;
+    onChangeText?: (text: string) => void;
+    dateTimeProps?: ReactNativeModalDateTimePickerProps;
+    mode?: ReactNativeModalDateTimePickerProps['mode'];
+    formatTemplate?: string;
+    formatShow?: string;
+} & StyledInputProps;
+
+const StyledDateTimePicker = ({
+    mode = 'date',
+    value,
+    onChangeText,
+    dateTimeProps,
+    formatTemplate,
+    formatShow,
+    ...inputProps
+}: StyledDateTimePickerProps) => {
     const [isVisible, setIsVisible] = useState(false);
-    const { mode = 'date', value, onChangeText, dateTimeProps, ...inputProps } = props;
 
     const handleConfirmDate = (date: any) => {
         hideDatePicker();
-        onChangeText?.(formatDate(date));
+        onChangeText?.(formatDate(date, formatTemplate));
     };
 
     const hideDatePicker = () => {
@@ -29,15 +45,14 @@ const StyledDateTimePicker = (props: any) => {
                 isVisible={isVisible}
                 mode={mode}
                 date={value ? new Date(value) : new Date()}
+                {...dateTimeProps}
                 onConfirm={handleConfirmDate}
                 onCancel={hideDatePicker}
-                {...dateTimeProps}
             />
             <StyledInput
-                value={value}
+                value={value && formatShow ? formatDate(value, formatShow) : value}
                 editable={false}
                 pointerEvents="none"
-                placeholder={YYYYMMDD}
                 renderRight={renderRightIcon}
                 onPress={() => setIsVisible(true)}
                 {...inputProps}

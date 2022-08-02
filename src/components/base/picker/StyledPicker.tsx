@@ -17,7 +17,6 @@ export interface PickerProps {
     dataList: Array<any>;
     onConfirm?(item: string): void;
     label?: string;
-    titleModalShowUp?: string;
     labelInput?: string;
     titleModalShowUp?: I18Type;
     currentValue?: any;

@@ -1,13 +1,13 @@
 import request from 'api/request';
 
 export const getProfile = (token?: string) =>
-    request.get(`v1/app/profile`, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
+    request.get(`member/profile`, token ? { headers: { Authorization: `Bearer ${token}` } } : {});
 export const getProfileUser = () => request.get(`v1/app/profile`);
-export const login = (params: any) => request.post(`v1/app/auth/login`, params);
+export const login = (params: any) => request.post(`client-auth/login`, params);
 
 export const register = (params: any) => request.post(`auth/register`, params);
 export const forgotPassword = (email: string) => request.post(`auth/forgot-password`, { email });
-export const checkIsExistEmail = (email: string) => request.post(`auth/check-account-existed`, { email });
+export const checkIsExistEmail = (email: string) => request.post(`client-auth/check-email-exist`, { email });
 export const getVerifyCode = (email: string) => request.post(`auth/request-verified-code`, { email });
 export const checkVerifyCode = (email: string, verifiedCode: string) =>
     request.post(`auth/check-verified-code`, { email, verifiedCode });
