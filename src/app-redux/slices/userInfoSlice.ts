@@ -5,7 +5,12 @@ import { CommonStatus } from './types';
 
 interface IUser {
     id: number;
-    username: string;
+    name: string;
+    gender: number;
+    images: any;
+    email: string;
+    birthday: string;
+    address: string;
     // ...
 }
 
