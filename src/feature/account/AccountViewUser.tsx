@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import { userInfoActions } from 'app-redux/slices/userInfoSlice';
 import { getProfileUser } from 'api/modules/api-app/authenticate';
+import { navigate } from '../../navigation/NavigationService';
 
 const AccountViewUser = () => {
     const navigation = useNavigation();
@@ -192,9 +193,9 @@ const AccountViewUser = () => {
                     // disabled={!conditionUpdate}
                 />
                 <StyledButton
-                    title="Search User"
+                    title="Search Member"
                     customStyle={styles.cssBtn}
-                    onPress={() => navigation.navigate(TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER)}
+                    onPress={() => navigate(TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER)}
                 />
             </View>
         </View>

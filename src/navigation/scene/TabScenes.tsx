@@ -3,7 +3,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
 import AccountHome from 'feature/account/AccountHome';
 import AccountViewUser from 'feature/account/AccountViewUser';
-import SearchUser from 'feature/account/SearchUser';
 import FollowScreem from 'feature/follow/FollowScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
 import HomeDetailScreen from 'feature/home/HomeDetailScreen';
@@ -16,6 +15,7 @@ import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import AccountTaskTrainning from '../../feature/account/AccountTask';
+import SearchMember from '../../feature/account/SearchMember';
 import SearchMyTask from '../../feature/follow/components/SearchMyTask';
 
 const MainStack = createStackNavigator();
@@ -34,7 +34,7 @@ const AccountView = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_HOME} component={AccountHome} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_PROFILE} component={AccountViewUser} />
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER} component={SearchUser} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER} component={SearchMember} />
     </MainStack.Navigator>
 );
 const SettingStack = () => (

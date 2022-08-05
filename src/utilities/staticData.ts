@@ -50,6 +50,7 @@ export const DATA = [
         content: en.follow.content,
     },
 ];
+export const severIMG = `https://aos-app-order-soba-8e35e74.s3.amazonaws.com/`;
 export const dataTest = {
     success: true,
     errorCode: 0,

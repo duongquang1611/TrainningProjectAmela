@@ -7,7 +7,7 @@ const pageSize = 10;
 
 const usePagingTakeAfter = (
     requestPaging: (config: AxiosRequestConfig) => Promise<any>,
-    cacheKey: string,
+    cacheKey?: string,
     initialParams?: any,
     onSuccess?: (data?: any, cbParams?: any) => void,
     onError?: (error: Error, cbParams?: any) => void,
@@ -26,6 +26,7 @@ const usePagingTakeAfter = (
             source.cancel('useEffect cleanup...');
         };
     }, []);
+
     useEffect(() => {
         if (refreshing) {
             runRequest({ takeAfter: '' });
@@ -71,15 +72,15 @@ const usePagingTakeAfter = (
         const paramsQuery = {
             pageSize,
             // eslint-disable-next-line no-unsafe-optional-chaining
-            takeAfter: list?.[list?.length - 1]?.lastTimeSent,
+            takeAfter: list?.[list?.length - 1]?.id,
             ...otherParams,
         };
+
         umiRequest.run({
             params: paramsQuery,
             cancelToken: source.token,
         });
     };
-
     const onRefresh = () => {
         setRefreshing(true);
     };
