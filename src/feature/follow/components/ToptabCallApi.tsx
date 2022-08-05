@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import { StyledButton, StyledList, StyledText } from 'components/base';
 import { Themes } from 'assets/themes';
-import { getPostFour, getPostOne, getPostThree, getPostTwo } from 'api/modules/api-app/general';
+import { getPostFour, getPostOne, getPostThree } from 'api/modules/api-app/general';
 import { wait } from 'utilities/helper';
 import StyledOverlayLoading from 'components/base/StyledOverlayLoading';
 
@@ -24,33 +24,33 @@ const NoreadScreen = () => {
             console.log(error);
         }
     };
-    const getPosts = async () => {
-        try {
-            const responsePost = await getPostTwo();
-            setDataTwo([responsePost]);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const getPosts = async () => {
+    //     try {
+    //         const responsePost = await getPostTwo();
+    //         setDataTwo([responsePost]);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
-    const getPostComment = async () => {
-        try {
-            const responsePost = await getPostThree();
-            setDataThree(responsePost);
-            // console.log(responsePost);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const getPostComment = async () => {
+    //     try {
+    //         const responsePost = await getPostThree();
+    //         setDataThree(responsePost);
+    //         // console.log(responsePost);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
 
-    const getPostComments = async () => {
-        try {
-            const responsePost = await getPostFour();
-            setDataFour(responsePost);
-        } catch (error) {
-            console.log(error);
-        }
-    };
+    // const getPostComments = async () => {
+    //     try {
+    //         const responsePost = await getPostFour();
+    //         setDataFour(responsePost);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // };
     const getAllData = async () => {
         try {
             const res = await Promise.all([getPostOne(), getPostFour(), getPostThree()]);
@@ -66,9 +66,9 @@ const NoreadScreen = () => {
 
     useEffect(() => {
         getPost();
-        getPosts();
-        getPostComment();
-        getPostComments();
+        // getPosts();
+        // getPostComment();
+        // getPostComments();
     }, []);
 
     const handleRandom = () => {
@@ -77,10 +77,10 @@ const NoreadScreen = () => {
             const randomIndex = Math.floor(Math.random() * dataOne.length);
             randomIndexs.push(randomIndex);
         }
-        const filtered = dataOne.filter((item: any, index: number) => {
-            return randomIndexs.includes(index);
-        });
-        setDataRandom(filtered);
+        // const filtered = dataOne.filter((item: any, index: number) => {
+        //     return randomIndexs.includes(index);
+        // });
+        // setDataRandom(filtered);
     };
 
     const handleRender = (propsItem: any) => {

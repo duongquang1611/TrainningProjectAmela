@@ -12,12 +12,12 @@ import yupValidate from 'utilities/yupValidate';
 import * as yup from 'yup';
 import { FormProvider, useForm } from 'react-hook-form';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import HeaderLogAndRegister from './HeaderLogAndRegister';
 import AlertMessage from '../../components/base/AlertMessage';
 import StyledDateTimePicker from '../../components/base/picker/StyledDateTimePicker';
 import StyledPicker from '../../components/base/picker/StyledPicker';
 import { dataGenderPicker } from '../../utilities/staticData';
 import ImagePicker from '../../utilities/upload/ImagePicker';
+import StyledHeader from '../../components/common/StyledHeader';
 
 const DEFAULT_FORM = {
     name: 'test001',
@@ -116,9 +116,9 @@ const RegisterTrainingScreen = () => {
 
     return (
         <>
+            <StyledHeader title="Register" />
             <StyledOverlayLoading visible={isLoading} />
             <View style={styles.container}>
-                <HeaderLogAndRegister isBack={true} customStyleIconBack={styles.cssIconBack} />
                 <View style={styles.cssAvatar}>
                     {image ? (
                         <View style={styles.cssAvatar}>

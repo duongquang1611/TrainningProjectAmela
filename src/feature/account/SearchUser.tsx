@@ -57,8 +57,6 @@ const SearchUser = () => {
             console.log(error);
         }
     };
-    console.log('find', find);
-
     const listItem = ({ item }: any) => {
         return <Item item={item} />;
     };

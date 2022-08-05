@@ -23,6 +23,7 @@ const HOME_ROUTE = {
 };
 const FOLLOW_ROUTE = {
     FOLLOW: 'FOLLOW',
+    SEARCH: 'SEARCH',
 };
 
 const SETTING_ROUTE = {

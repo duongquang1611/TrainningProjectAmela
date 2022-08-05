@@ -4,11 +4,19 @@ import React, { memo } from 'react';
 import { View } from 'react-native';
 import { ScaledSheet } from 'react-native-size-matters';
 import Images from '../../assets/images';
-import { AUTHENTICATE_ROUTE } from '../../navigation/config/routes';
 import { navigate } from '../../navigation/NavigationService';
 
 const HeaderLogAndRegister = (props: any) => {
-    const { title, customStyle, img, customStyleIcon, onPressIconRight, isBack = true, customStyleIconBack } = props;
+    const {
+        title,
+        customStyle,
+        img,
+        customStyleIcon,
+        onPressIconRight,
+        isBack = true,
+        customStyleIconBack,
+        router,
+    } = props;
 
     return (
         <View style={styles.container}>
@@ -19,7 +27,7 @@ const HeaderLogAndRegister = (props: any) => {
                 </StyledTouchable>
             )}
             {isBack ? (
-                <StyledTouchable onPress={() => navigate(AUTHENTICATE_ROUTE.INTRO)} customStyle={styles.buttonBack}>
+                <StyledTouchable onPress={() => navigate(router)} customStyle={styles.buttonBack}>
                     <StyledIcon
                         source={Images.icons.back}
                         size={50}

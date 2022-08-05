@@ -23,7 +23,9 @@ const yupValidate = {
     gender: () => yup.string().required(() => requireField('gender')),
     address: () => yup.string().required(() => requireField('address')),
     description: () => yup.string().required(() => requireField('description')),
-    currentDate: () => yup.string().required(() => requireField('currentDate')),
+    currentDate: () => yup.string(),
+    startTime: () => yup.string(),
+    endTime: () => yup.string(),
     note: () => yup.string().required(() => requireField('note')),
     email: () =>
         yup
