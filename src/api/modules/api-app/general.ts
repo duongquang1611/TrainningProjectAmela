@@ -20,3 +20,4 @@ export const deleteTask = (taskId: number) => request.delete(`task/deleted-task/
 export const putUpdateTaskDate = (taskId: number, params: any) => request.put(`task/update-task/${taskId}`, params);
 export const getSearchTask = (params: any) => request.get(`task/my-task?`, params);
 export const getMemberSearch = () => request.get(`member/search?`);
+export const putEditProfile = (params: any) => request.put(`member/edit-profile`, params);
