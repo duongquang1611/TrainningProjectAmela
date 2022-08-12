@@ -7,6 +7,7 @@ import Images from '../../assets/images';
 import Metrics from '../../assets/metrics';
 import { Themes } from '../../assets/themes';
 import StyledSwitch from '../../components/base/StyledSwitch';
+import StyledToggleButton from '../../components/base/StyledToggleButton';
 import StyledIconHeader from './components/StyledIconHeader';
 
 const AnimatedStyledInput = Animated.createAnimatedComponent(TextInput);
@@ -199,6 +200,7 @@ const NotificationScreen: FunctionComponent = () => {
                             }}
                             customStyle={styles.cssSwitch}
                         />
+                        <StyledToggleButton />
                     </View>
                 </View>
             </ScrollView>
