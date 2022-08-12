@@ -1,93 +1,92 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { View, Animated, Pressable } from 'react-native';
-import { ScaledSheet } from 'react-native-size-matters';
+import React, { useRef, useState } from 'react';
+import { Animated, Pressable, View } from 'react-native';
+import { scale, ScaledSheet } from 'react-native-size-matters';
 import Images from '../../assets/images';
+import { Themes } from '../../assets/themes';
+import StyledToggleIcon from '../../feature/notification/components/StyledToggleIcon';
 import StyledImage from './StyledImage';
 
-// interface StyledToggleButtonProps {
-//     title: string;
-//     customStyle?: StyleProp<ViewStyle>;
-//     customStyleText?: StyleProp<TextStyle>;
-//     onPress(params?: any): void;
-//     onLongPress?(): void;
-//     disabled?: boolean;
-// }
-
-const StyledToggleButton = () => {
-    // const { title, customStyle, onPress, customStyleText, onLongPress, disabled = false } = props;
+interface StyledToggleButtonProps {
+    size?: number;
+    onPress?(): void;
+    actions: any[];
+}
+const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
+const StyledToggleButton = (props: StyledToggleButtonProps) => {
+    const { actions = [], size = 50 } = props;
     const [isActive, setIsActive] = useState(false);
-    const AnimatedTouchable = Animated.createAnimatedComponent(Pressable);
     const offset = useRef(new Animated.Value(0)).current;
     const animationIconPlus = {
         transform: [
-            { scale: offset },
             {
-                opacity: offset.interpolate({
-                    inputRange: [1, 100],
-                    outputRange: [0, 1],
+                rotate: offset.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['0deg', '-45deg'],
                 }),
             },
         ],
     };
-    useEffect(() => {
-        Animated.timing(offset, {
-            toValue: isActive ? 1 : 0,
-            duration: 300,
-            useNativeDriver: false,
+
+    const animationIconShow = {
+        transform: [
+            {
+                scale: offset,
+            },
+            {
+                translateY: offset.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, scale(-size / 2)],
+                }),
+            },
+        ],
+    };
+
+    const toggleMenu = () => {
+        setIsActive(!isActive);
+        Animated.spring(offset, {
+            toValue: isActive ? 0 : 1,
+            useNativeDriver: true,
         }).start();
-    }, [isActive]);
+    };
+
     return (
-        <View style={styles.container}>
-            <AnimatedTouchable
-                onPress={() => {
-                    setIsActive(!isActive);
-                }}>
-                <Animated.View style={styles.boxContainerIconHide}>
-                    <StyledImage source={Images.icons.plus} customStyle={[styles.featureIcon, animationIconPlus]} />
+        <View>
+            <AnimatedTouchable style={styles.cssToggleMenu} onPress={toggleMenu}>
+                <Animated.View
+                    style={[
+                        {
+                            width: scale(size / 1.2),
+                            height: scale(size / 1.2),
+                            borderRadius: scale(size / 2),
+                            backgroundColor: Themes.COLORS.black,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 999,
+                        },
+                        animationIconPlus,
+                    ]}>
+                    <StyledImage
+                        source={Images.icons.bell}
+                        customStyle={{
+                            width: scale(size / 2.5),
+                            height: scale(size / 2.5),
+                        }}
+                    />
                 </Animated.View>
             </AnimatedTouchable>
-            <View style={styles.boxContainerIconHide}>
-                <StyledImage source={Images.icons.plus} customStyle={styles.featureIcon} />
-            </View>
-            <View style={styles.boxContainerIconHide}>
-                <StyledImage source={Images.icons.plus} customStyle={styles.featureIcon} />
-            </View>
-            <View style={styles.boxContainerIconHide}>
-                <StyledImage source={Images.icons.plus} customStyle={styles.featureIcon} />
-            </View>
-            <View style={styles.boxContainerIcon}>
-                <StyledImage source={Images.icons.plus} customStyle={styles.featureIcon} />
-            </View>
+            {actions.map((iconName: any, index: number) => {
+                return (
+                    <StyledToggleIcon key={index} size={size} customStyle={animationIconShow} source={iconName.icon} />
+                );
+            })}
         </View>
     );
 };
 
 const styles = ScaledSheet.create({
-    container: {
-        flex: 1,
-    },
-    boxContainerIcon: {
-        width: 50,
-        height: 50,
-        backgroundColor: 'black',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 30,
-    },
-    featureIcon: {
+    cssToggleMenu: {
         position: 'absolute',
-        width: 30,
-        height: 30,
-    },
-    boxContainerIconHide: {
-        width: 50,
-        height: 50,
-        backgroundColor: 'black',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 30,
-        position: 'absolute',
+        zIndex: 999,
     },
 });
-
 export default StyledToggleButton;
