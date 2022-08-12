@@ -7,8 +7,29 @@ import Images from '../../assets/images';
 import Metrics from '../../assets/metrics';
 import { Themes } from '../../assets/themes';
 import StyledSwitch from '../../components/base/StyledSwitch';
+import StyledToggleButton from '../../components/base/StyledToggleButton';
 import StyledIconHeader from './components/StyledIconHeader';
 
+const actions = [
+    {
+        text: 'Accessibility',
+        icon: Images.icons.bell,
+        name: 'bt_accessibility',
+        position: 2,
+    },
+    {
+        text: 'Language',
+        icon: Images.icons.avatar,
+        name: 'bt_language',
+        position: 1,
+    },
+    {
+        text: 'Location',
+        icon: Images.icons.scanCircle,
+        name: 'bt_room',
+        position: 3,
+    },
+];
 const AnimatedStyledInput = Animated.createAnimatedComponent(TextInput);
 const UPPER_HEADER_HEIGHT = scale(40);
 const LOWER_HEADER_HEIGHT = scale(96);
@@ -188,6 +209,7 @@ const NotificationScreen: FunctionComponent = () => {
                 snapToInterval={scale(LOWER_HEADER_HEIGHT)}
                 scrollEventThrottle={16}>
                 <View style={styles.paddingForHeader} />
+
                 <View style={styles.scrollViewContainer}>
                     <View style={styles.body}>
                         <StyledButton title={'Logout'} onPress={AuthenticateService.logOut} />
@@ -199,6 +221,9 @@ const NotificationScreen: FunctionComponent = () => {
                             }}
                             customStyle={styles.cssSwitch}
                         />
+                        <View style={styles.cssToggleMenu}>
+                            <StyledToggleButton size={50} actions={actions} />
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -300,6 +325,12 @@ const styles = ScaledSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: '8@s',
+    },
+    cssToggleMenu: {
+        alignSelf: 'center',
+        width: '50@s',
+        height: '50@s',
+        backgroundColor: Themes.COLORS.darkOrange,
     },
 });
 export default NotificationScreen;
