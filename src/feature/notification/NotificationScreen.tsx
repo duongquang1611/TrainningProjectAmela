@@ -1,6 +1,6 @@
-import { StyledButton, StyledImage } from 'components/base';
+import { StyledButton, StyledImage, StyledText } from 'components/base';
 import React, { FunctionComponent, useRef, useState } from 'react';
-import { Animated, SafeAreaView, ScrollView, TextInput, View } from 'react-native';
+import { Animated, SafeAreaView, ScrollView, TextInput, TouchableOpacity, View } from 'react-native';
 import { scale, ScaledSheet } from 'react-native-size-matters';
 import AuthenticateService from 'utilities/authenticate/AuthenticateService';
 import Images from '../../assets/images';
@@ -8,6 +8,7 @@ import Metrics from '../../assets/metrics';
 import { Themes } from '../../assets/themes';
 import StyledSwitch from '../../components/base/StyledSwitch';
 import StyledToggleButton from '../../components/base/StyledToggleButton';
+import AnimatedHearts from './components/AnimatedHearts';
 import StyledIconHeader from './components/StyledIconHeader';
 
 const actions = [
@@ -33,8 +34,14 @@ const actions = [
 const AnimatedStyledInput = Animated.createAnimatedComponent(TextInput);
 const UPPER_HEADER_HEIGHT = scale(40);
 const LOWER_HEADER_HEIGHT = scale(96);
+const getRenderId = () => {
+    return Math.floor(Math.random() * Date.now()).toString();
+};
 const NotificationScreen: FunctionComponent = () => {
     const [isActive, setIsActive] = useState(false);
+    const [heartCount, setHeartCount] = useState(0);
+    const [hearts, setHearts] = useState<{ id: string }[]>([]);
+    const heartCountAnimatedValue = useRef(new Animated.Value(0)).current;
     const offset = useRef(new Animated.Value(0)).current;
 
     const textInputAnimation = {
@@ -212,6 +219,80 @@ const NotificationScreen: FunctionComponent = () => {
 
                 <View style={styles.scrollViewContainer}>
                     <View style={styles.body}>
+                        <View style={styles.styleMessageContainer}>
+                            <View style={styles.styleAvatarMessage}>
+                                <StyledImage source={Images.icons.avatar} customStyle={styles.styleImgAvatarMessage} />
+                            </View>
+                            <View style={styles.textMessage}>
+                                <View style={styles.boxMessage}>
+                                    <StyledText
+                                        originValue="Xin Chào ! Tôi là Hoàng Ngọc Long"
+                                        customStyle={styles.txtMessageTitle}
+                                    />
+                                    <StyledText
+                                        originValue="Position : developer React Native"
+                                        customStyle={styles.txtContentMessage}
+                                    />
+                                    <StyledText originValue="Division : Hades" customStyle={styles.txtContentMessage} />
+                                    <TouchableOpacity
+                                        style={styles.styleHeart}
+                                        onPress={() => {
+                                            setHeartCount(heartCount + 1);
+                                            setHearts([...hearts, { id: getRenderId() }]);
+                                            setTimeout(() => {
+                                                Animated.spring(heartCountAnimatedValue, {
+                                                    toValue: 0,
+                                                    speed: 48,
+                                                    useNativeDriver: true,
+                                                }).start();
+                                            }, 500);
+                                            Animated.spring(heartCountAnimatedValue, {
+                                                toValue: -50,
+                                                speed: 48,
+                                                useNativeDriver: true,
+                                            }).start();
+                                        }}>
+                                        {heartCount ? (
+                                            <StyledImage
+                                                source={Images.icons.heart}
+                                                customStyle={styles.cssHeart}
+                                                resizeMode="contain"
+                                            />
+                                        ) : (
+                                            <StyledImage
+                                                source={Images.icons.tab.follow}
+                                                customStyle={styles.cssHeart}
+                                                resizeMode="contain"
+                                            />
+                                        )}
+                                    </TouchableOpacity>
+                                    <Animated.View
+                                        pointerEvents={'none'}
+                                        style={[
+                                            styles.styleHeart,
+                                            {
+                                                transform: [
+                                                    {
+                                                        translateY: heartCountAnimatedValue,
+                                                    },
+                                                    {
+                                                        scaleX: heartCountAnimatedValue.interpolate({
+                                                            inputRange: [scale(-50), 0],
+                                                            outputRange: [scale(1), 0],
+                                                            extrapolate: 'clamp',
+                                                        }),
+                                                    },
+                                                ],
+                                            },
+                                        ]}>
+                                        <StyledText originValue={`${heartCount}`} customStyle={{ color: 'red' }} />
+                                    </Animated.View>
+                                    {hearts.map(({ id }: any) => {
+                                        return <AnimatedHearts key={id} />;
+                                    })}
+                                </View>
+                            </View>
+                        </View>
                         <StyledButton title={'Logout'} onPress={AuthenticateService.logOut} />
                         <StyledSwitch
                             size={50}
@@ -331,6 +412,61 @@ const styles = ScaledSheet.create({
         width: '50@s',
         height: '50@s',
         backgroundColor: Themes.COLORS.darkOrange,
+    },
+    styleMessageContainer: {
+        width: '100%',
+        height: '80@s',
+        backgroundColor: Themes.COLORS.LightGray,
+        marginVertical: '10@vs',
+        flexDirection: 'row',
+    },
+    styleAvatarMessage: {
+        width: '20%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    styleImgAvatarMessage: {
+        width: '70@s',
+        height: '70@s',
+    },
+    textMessage: {
+        width: '90%',
+        height: '100%',
+        paddingHorizontal: '10@s',
+        justifyContent: 'center',
+    },
+    boxMessage: {
+        height: 'auto',
+        width: '80%',
+        backgroundColor: '#0099FF',
+        borderRadius: '5@s',
+        paddingVertical: '5@vs',
+        paddingLeft: '5@ms',
+    },
+    txtMessageTitle: {
+        fontSize: '15@s',
+        color: Themes.COLORS.white,
+        fontWeight: 'bold',
+    },
+    txtContentMessage: {
+        color: Themes.COLORS.white,
+    },
+    styleHeart: {
+        width: '30@s',
+        height: '30@s',
+        backgroundColor: Themes.COLORS.white,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 30,
+        position: 'absolute',
+        right: '-10@s',
+        bottom: '-5@s',
+        zIndex: 999,
+    },
+    cssHeart: {
+        width: '15@s',
+        height: '15@s',
     },
 });
 export default NotificationScreen;
