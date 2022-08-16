@@ -18,6 +18,7 @@ const Images = {
         withdrawCircle: require('./icon/ic_withdraw-circle.png'),
         withdraw: require('./icon/ic_withdraw.png'),
         bell: require('./icon/bell.png'),
+        heart: require('./icon/ic_heart.png'),
         tab: {
             home: require('./icon/ic_home.png'),
             notification: require('./icon/ic_notification.png'),
