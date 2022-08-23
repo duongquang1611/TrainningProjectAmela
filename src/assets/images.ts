@@ -39,6 +39,10 @@ const Images = {
     photo: {
         defaultImage: require('./photo/img_default_image.png'),
         introImage: require('./photo/img_intro.png'),
+        foodItem_one: require('./photo/img-food1.jpeg'),
+        foodItem_two: require('./photo/img-food2.jpeg'),
+        foodItem_three: require('./photo/img-food3.jpeg'),
+        foodItem_four: require('./photo/img-food4.jpeg'),
     },
 };
 

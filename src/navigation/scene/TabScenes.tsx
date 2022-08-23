@@ -1,5 +1,4 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
 import AccountHome from 'feature/account/AccountHome';
 import AccountViewUser from 'feature/account/AccountViewUser';
@@ -14,11 +13,14 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import AccountTaskTrainning from '../../feature/account/AccountTask';
+import { createSharedElementStackNavigator, SharedElementSceneComponent } from 'react-navigation-shared-element';
 import SearchMember from '../../feature/account/SearchMember';
 import SearchMyTask from '../../feature/follow/components/SearchMyTask';
+import DetailFoods from '../../feature/setting/DetailsFood';
+import ProductsItem from '../../feature/setting/ListFood';
 
-const MainStack = createStackNavigator();
+// const MainStack = createStackNavigator();
+const MainStack = createSharedElementStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 const HomeStack = () => (
@@ -39,7 +41,25 @@ const AccountView = () => (
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={AccountTaskTrainning} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={ProductsItem} />
+        <MainStack.Screen
+            name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.DETAILS}
+            component={DetailFoods as SharedElementSceneComponent<any>}
+            options={{
+                gestureEnabled: true,
+                transitionSpec: {
+                    open: { animation: 'timing', config: { duration: 300 } },
+                    close: { animation: 'timing', config: { duration: 300 } },
+                },
+                cardStyleInterpolator: ({ current: { progress } }) => {
+                    return {
+                        cardStyle: {
+                            opacity: progress,
+                        },
+                    };
+                },
+            }}
+        />
     </MainStack.Navigator>
 );
 const FollowStack = () => (
