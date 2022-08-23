@@ -1,4 +1,5 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
 import AccountHome from 'feature/account/AccountHome';
 import AccountViewUser from 'feature/account/AccountViewUser';
@@ -13,14 +14,15 @@ import navigationConfigs from 'navigation/config/options';
 import { TAB_NAVIGATION_ROOT } from 'navigation/config/routes';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { createSharedElementStackNavigator, SharedElementSceneComponent } from 'react-navigation-shared-element';
+import { SharedElementSceneComponent } from 'react-navigation-shared-element';
 import SearchMember from '../../feature/account/SearchMember';
 import SearchMyTask from '../../feature/follow/components/SearchMyTask';
 import DetailFoods from '../../feature/setting/DetailsFood';
-import ProductsItem from '../../feature/setting/ListFood';
+import NavigationShow from '../../feature/setting/NavigationShowPhoto';
+import Camera from '../../feature/setting/ShowPhotosGallery';
 
-// const MainStack = createStackNavigator();
-const MainStack = createSharedElementStackNavigator();
+const MainStack = createStackNavigator();
+// const MainStack = createSharedElementStackNavigator();
 const MainTab = createBottomTabNavigator();
 
 const HomeStack = () => (
@@ -41,7 +43,8 @@ const AccountView = () => (
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={ProductsItem} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.NAVIGATIONSHOW} component={NavigationShow} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={Camera} />
         <MainStack.Screen
             name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.DETAILS}
             component={DetailFoods as SharedElementSceneComponent<any>}
@@ -106,7 +109,7 @@ const MainTabContainer = () => {
     return (
         <MainTab.Navigator
             screenOptions={{ headerShown: false }}
-            initialRouteName={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.ROOT}
+            initialRouteName={TAB_NAVIGATION_ROOT.SETTING_ROUTE.ROOT}
             tabBar={(props: BottomTabBarProps) => <StyledTabBar {...props} />}>
             {ArrayTabs.map(item => (
                 <MainTab.Screen key={item.name} options={{ ...item }} {...item} />
