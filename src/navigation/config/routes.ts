@@ -29,6 +29,7 @@ const FOLLOW_ROUTE = {
 const SETTING_ROUTE = {
     ROOT: 'SETTING_ROOT',
     CHAT: 'CHAT',
+    DETAILS: 'DETAILS',
 };
 
 const NOTIFICATION_ROUTE = {
