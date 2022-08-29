@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import i18next from 'i18next';
-import { Alert } from 'react-native';
+import { Alert, Platform } from 'react-native';
 import Config from 'react-native-config';
 import { check, PERMISSIONS, RESULTS, openSettings, request } from 'react-native-permissions';
 import { isIos, logger } from '../helper';
@@ -21,7 +21,7 @@ export const checkCamera = async () => {
             return false;
         }
         return true;
-    } catch (err) {
+    } catch (err: any) {
         logger(err);
         return false;
     }
@@ -46,10 +46,36 @@ export const checkPhoto = async () => {
             return false;
         }
         return true;
-    } catch (err) {
+    } catch (err: any) {
         logger(err);
         return false;
     }
+};
+
+export const checkCameraRoll = async () => {
+    if (Platform.OS === 'android') {
+        const result = await request(PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE, {
+            title: 'Permission Explanation',
+            message: 'ReactNativeForYou would like to access your photos!',
+        });
+
+        if (result === RESULTS.BLOCKED) {
+            showRequestPermission('photo');
+            return false;
+        }
+        if (result === RESULTS.DENIED) {
+            const resultCheck = await request(
+                isIos ? PERMISSIONS.IOS.PHOTO_LIBRARY : PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+            );
+            return resultCheck === RESULTS.GRANTED;
+        }
+        if (result === RESULTS.UNAVAILABLE) {
+            showPermissionUnavailable('photo');
+            return false;
+        }
+        return true;
+    }
+    return true;
 };
 
 export const checkAudio = async () => {
@@ -68,7 +94,7 @@ export const checkAudio = async () => {
             return false;
         }
         return true;
-    } catch (err) {
+    } catch (err: any) {
         logger(err);
         return false;
     }
