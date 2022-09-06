@@ -43,6 +43,11 @@ const Images = {
         foodItem_two: require('./photo/img-food2.jpeg'),
         foodItem_three: require('./photo/img-food3.jpeg'),
         foodItem_four: require('./photo/img-food4.jpeg'),
+        songImage_one: require('./photo/song1.jpeg'),
+        songImage_two: require('./photo/song2.jpeg'),
+        songImage_three: require('./photo/song3.jpeg'),
+        songImage_four: require('./photo/song4.jpeg'),
+        songImage_five: require('./photo/song5.jpeg'),
     },
 };
 

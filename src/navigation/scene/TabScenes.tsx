@@ -18,7 +18,7 @@ import { SharedElementSceneComponent } from 'react-navigation-shared-element';
 import SearchMember from '../../feature/account/SearchMember';
 import SearchMyTask from '../../feature/follow/components/SearchMyTask';
 import DetailFoods from '../../feature/setting/DetailsFood';
-import NavigationShow from '../../feature/setting/NavigationShowPhoto';
+import MusicPlayer from '../../feature/setting/MusicPlayer';
 import Camera from '../../feature/setting/ShowPhotosGallery';
 
 const MainStack = createStackNavigator();
@@ -43,7 +43,7 @@ const AccountView = () => (
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.NAVIGATIONSHOW} component={NavigationShow} />
+        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.NAVIGATIONSHOW} component={MusicPlayer} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={Camera} />
         <MainStack.Screen
             name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.DETAILS}

@@ -1,4 +1,5 @@
 import en from 'assets/locates/en';
+import Images from '../assets/images';
 
 export const staticValue = {
     DEFAULT: 1,
@@ -33,6 +34,43 @@ export const dataGenderPicker = [
     },
 ];
 export const linkIMG = `https://aos-app-order-soba-8e35e74.s3.amazonaws.com/`;
+export const songs = [
+    {
+        id: 1,
+        title: '19th Floor',
+        artist: 'Bobby Richards',
+        artwork: Images.photo.songImage_one,
+        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+    },
+    {
+        id: 2,
+        title: 'Awful',
+        artist: 'josh pan',
+        artwork: Images.photo.songImage_two,
+        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+    },
+    {
+        id: 3,
+        title: 'Something is Going On',
+        artist: 'Godmode',
+        artwork: Images.photo.songImage_three,
+        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
+    },
+    {
+        id: 4,
+        title: 'Book The Rental Wit It',
+        artist: 'RAGE',
+        artwork: Images.photo.songImage_four,
+        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
+    },
+    {
+        id: 5,
+        title: 'Crimson Fly',
+        artist: 'Huma-Huma',
+        artwork: Images.photo.songImage_five,
+        url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
+    },
+];
 
 export const DATA = [
     {
