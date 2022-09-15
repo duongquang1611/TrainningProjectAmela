@@ -1,7 +1,6 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import Images from 'assets/images';
-import AccountHome from 'feature/account/AccountHome';
 import AccountViewUser from 'feature/account/AccountViewUser';
 import FollowScreem from 'feature/follow/FollowScreen';
 import HomeDataScreen from 'feature/home/HomeDataScreen';
@@ -18,7 +17,7 @@ import { SharedElementSceneComponent } from 'react-navigation-shared-element';
 import SearchMember from '../../feature/account/SearchMember';
 import SearchMyTask from '../../feature/follow/components/SearchMyTask';
 import DetailFoods from '../../feature/setting/DetailsFood';
-import MusicPlayer from '../../feature/setting/MusicPlayer';
+// import MusicPlayer from '../../feature/setting/MusicPlayer';
 import Camera from '../../feature/setting/ShowPhotosGallery';
 
 const MainStack = createStackNavigator();
@@ -36,14 +35,13 @@ const HomeStack = () => (
 );
 const AccountView = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_HOME} component={AccountHome} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.USER_PROFILE} component={AccountViewUser} />
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.ACCOUNT_ROUTE.SEARCH_USER} component={SearchMember} />
     </MainStack.Navigator>
 );
 const SettingStack = () => (
     <MainStack.Navigator screenOptions={navigationConfigs}>
-        <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.NAVIGATIONSHOW} component={MusicPlayer} />
+        {/* <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.NAVIGATIONSHOW} component={MusicPlayer} /> */}
         <MainStack.Screen name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.CHAT} component={Camera} />
         <MainStack.Screen
             name={TAB_NAVIGATION_ROOT.SETTING_ROUTE.DETAILS}

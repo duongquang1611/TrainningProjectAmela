@@ -1,5 +1,5 @@
 apply plugin: "com.android.application"
-
+apply plugin: 'com.google.gms.google-services'
 project.ext.envConfigFiles = [
     dev: ".env.development",
     staging: ".env.staging",
@@ -230,15 +230,15 @@ android {
     }
     signingConfigs {
        debug {
-            storeFile file(DEBUG_STORE_FILE)
+            storeFile file(firebase.keystore)
             storePassword DEBUG_STORE_PASSWORD
-            keyAlias DEBUG_KEY_ALIAS
+            keyAlias 'fbalias'
             keyPassword DEBUG_KEY_PASSWORD
         }
         development {
-            storeFile file(DEBUG_STORE_FILE)
+            storeFile file(firebase.keystore)
             storePassword DEBUG_STORE_PASSWORD
-            keyAlias DEBUG_KEY_ALIAS
+            keyAlias 'fbalias'
             keyPassword DEBUG_KEY_PASSWORD
         }
         staging {
@@ -305,7 +305,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-
+    implementation platform('com.google.firebase:firebase-bom:30.4.1')
+    implementation 'com.google.firebase:firebase-analytics'
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

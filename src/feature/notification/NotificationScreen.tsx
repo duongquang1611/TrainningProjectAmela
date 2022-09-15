@@ -159,8 +159,15 @@ const NotificationScreen: FunctionComponent = () => {
         inputRange: [0, LOWER_HEADER_HEIGHT],
         outputRange: [Themes.COLORS.black, Themes.COLORS.transparent],
     });
+    // const handleChange = (t: any) => {
+    //     console.log(t);
+
+    //     refText.current = t;
+    // };
+
     return (
         <View style={styles.container}>
+            {console.log('re-render')}
             <SafeAreaView>
                 <View style={styles.upperHeaderPlaceHoler} />
             </SafeAreaView>
@@ -218,6 +225,20 @@ const NotificationScreen: FunctionComponent = () => {
                 <View style={styles.paddingForHeader} />
 
                 <View style={styles.scrollViewContainer}>
+                    {/* <View
+                        style={{
+                            width: 300,
+                            height: 300,
+                            backgroundColor: 'pink',
+                            flexDirection: 'column',
+                        }}>
+                        <TextInput
+                            ref={refText}
+                            style={{ width: 200, height: 50, backgroundColor: 'green' }}
+                            onChangeText={handleChange}
+                        />
+                        <StyledButton onPress={handleChange} title="submit" />
+                    </View> */}
                     <View style={styles.body}>
                         <View style={styles.styleMessageContainer}>
                             <View style={styles.styleAvatarMessage}>
